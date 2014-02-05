@@ -61,7 +61,7 @@ class Cadastro extends CI_Controller {
         {
 			$data = new Prosumidor(NULL, $this->input->post('email'), $this->input->post('senha'), $this->input->post('nome'),
 									$this->input->post('cpf'), $this->input->post('telefone'), $this->input->post('endereco'), 
-									$this->input->post('sexo'), 1, $this->input->post('tipo'), 0);
+									$this->input->post('sexo'), 1, $this->input->post('tipo'), 0.00);
 			$result = $this->Prosumidor_model->inserirProsumidor($data);
 			
 	 		// Informa ao usuário que a inserção ocorreu com sucesso e retorna a tela principal da administração

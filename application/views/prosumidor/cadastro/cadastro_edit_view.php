@@ -135,8 +135,7 @@
 
 							$options = array(
 									  '1'		=> 'Consumidor',
-									  '2' 		=> 'Vendendor',
-									  '3'		=> 'Prosumidor'
+									  '2' 		=> 'Prosumidor'
 									);
 							$js = 'id="tipo" class="form-control"';
 							echo '<div class="col-md-6"><div class="form-group"><label>Tipo</label>'.form_dropdown('tipo', $options, $tipo, $js);

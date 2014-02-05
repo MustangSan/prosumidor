@@ -55,7 +55,7 @@ class Login extends CI_Controller {
                 $this->session->set_userdata($data);
 				
                 // Caso tudo esteja correto, direciona o usuário para a tela de início do painel de administração
-				redirect('administracao/administradores', 'refresh');
+				redirect('administracao/inicio', 'refresh');
 
             // Se o usuário não for validado
             } else {
