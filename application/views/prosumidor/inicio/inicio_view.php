@@ -60,7 +60,7 @@
 											else
 												echo  '<td><center>Não</center></td>';
 											//echo '<td>'.$a->getDisponibilidade().'</td>';
-											echo '<td><a href="#"><center><i class="icon-info-sign"></i></center></a></td>';						
+											echo '<td><a href="'.$base.'prosumidor/produtos/verMais/'.$a->getIdProduto().'"><center><i class="icon-info-sign"></i></center></a></td>';						
 											echo '</tr>';
 										}
 									}
