@@ -313,7 +313,7 @@ class Produtos extends CI_Controller {
 			else{
 				echo "alguma coisa errada";
 			}
-		redirect('administracao/produtos', 'refresh');
+		redirect('administracao/produtos/adicionarClassificacao/'.$idProduto, 'refresh');
 	}
 
 

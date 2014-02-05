@@ -14,19 +14,44 @@
 			
 				foreach ($class as $key) {
 					$b = $key->getIdClassificacao();
-					$data = array(
+					/*$data = array(
 					'name'        => 'classi'.$b,
 					'id'          => 'classi'.$b,
 					'value'       => 1,
 					'checked'     => FALSE
-					);
+					);*/
 
 					if(isset($idsClass)){
-						foreach($idsClass as $a)
-							if($key->getIdClassificacao() == $a['idClassificacao'])
-								$data = array(	//'value' => $b,
-												'checked' => TRUE);
+						foreach($idsClass as $a){
+							if($key->getIdClassificacao() == $a['idClassificacao']){
+								$data = array(
+								'name'        => 'classi'.$b,
+								'id'          => 'classi'.$b,
+								'value'       => 1,
+								'checked'     => TRUE
+								);
+								break;
+								//$data = array(	//'value' => $b,
+								//				'checked' => TRUE);
+							}
+							else{
+								$data = array(
+								'name'        => 'classi'.$b,
+								'id'          => 'classi'.$b,
+								'value'       => 1,
+								'checked'     => FALSE
+								);
+							}
+						}
 
+					}
+					else{
+						$data = array(
+						'name'        => 'classi'.$b,
+						'id'          => 'classi'.$b,
+						'value'       => 1,
+						'checked'     => FALSE
+						);
 					}
 
 				echo '<div class="input-prepend"> <span class="add-on input-round" style="width: 105px; padding-left: 10px; text-align: left;">'.form_checkbox($data).$key->getNome().'</span>';
@@ -45,7 +70,7 @@
 			
 			form_close();
 		
-			echo '&nbsp;<a href="'.$base.'administracao/produtos/" class="btn btn-danger">Cancelar</a>';
+			echo '&nbsp;<a href="'.$base.'administracao/produtos/" class="btn btn-danger">Voltar</a>';
 		?>
 	</div>
 </body>
