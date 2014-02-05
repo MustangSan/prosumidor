@@ -6,8 +6,8 @@
 
 <div class="all-wrapper no-menu-wrapper">
   <div class="login-logo-w">
-    <a href="#" class="logo">
-      <i class="icon-cloud-download"></i>
+    <a class="logo">
+      <i class="icon-shopping-cart"></i>
       <span>Prosumidor</span>
     </a>
   </div>
@@ -60,18 +60,16 @@
 				echo form_input($data);
 				
 				form_close();
+
+				if (isset($result) && $result == 'loginErro')
+					echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>E-mail ou senha estão incorretos!</div>';
 			?>
-
-
-
-
-
-
-	<?php 			
-		if (isset($result) && $result == 'loginErro')
-			echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>E-mail ou senha estão incorretos!</div>';
-
-		//echo '&nbsp;<a href="'.$base.'prosumidor/cadastro/" class="btn btn-danger">Cadastrar</a>';
-	?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php $this->load->view('pages/footer.php'); ?>

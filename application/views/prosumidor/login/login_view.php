@@ -6,8 +6,8 @@
 
 <div class="all-wrapper no-menu-wrapper">
   <div class="login-logo-w">
-    <a href="#" class="logo">
-      <i class="icon-cloud-download"></i>
+    <a class="logo">
+      <i class="icon-shopping-cart"></i>
       <span>Prosumidor</span>
     </a>
   </div>
@@ -19,7 +19,6 @@
           <div class="main-content main-content-grey-gradient no-page-header">
             <div class="main-content-inner">
 			<?php 
-
 				echo form_open();
 
 				echo '<h3 class="form-title form-title-first"><i class="icon-lock"></i> Login do Prosumidor</h3>';
@@ -53,25 +52,25 @@
 				$data = array(
 				  'type'		=> 'submit',
 	              'id'          => 'submit',
-	              'class'       => 'btn btn-large btn-info submit',
+	              'class'       => 'btn btn-primary',
 				  'value' 		=> 'Entrar',
 			  	  'onclick'  	=> 'setTimeout(twoClicks, 1);'
 	            );
 				echo form_input($data);
 				
 				form_close();
+
+				if (isset($result) && $result == 'loginErro')
+					echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>E-mail ou senha estão incorretos!</div>';
+
+				echo '&nbsp;<a href="'.$base.'prosumidor/cadastro/" class="btn btn-info"><i class="icon-edit"></i> Cadastrar</a>';
 			?>
-
-
-
-
-
-
-	<?php 			
-		if (isset($result) && $result == 'loginErro')
-			echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>E-mail ou senha estão incorretos!</div>';
-
-		echo '&nbsp;<a href="'.$base.'prosumidor/cadastro/" class="btn btn-danger">Cadastrar</a>';
-	?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php $this->load->view('pages/footer.php'); ?>

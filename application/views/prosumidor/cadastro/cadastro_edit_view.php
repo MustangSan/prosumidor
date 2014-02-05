@@ -1,123 +1,176 @@
-<body>
-<html>
-	<?php 		
-		$base = $this->config->item('base_url');
-	?>
+<?php 
+	$this->load->view('pages/header.php');
 
-    
-	<div class="conteudo">
-		<h2>Fazer Cadastro</h2>
-		<br />
-		<?php 			
-			echo form_open();
-			
-			$data = array(
-              'name'        => 'email',
-              'id'          => 'prependedInput',
-			  'type'		=> 'text',
-			  'style'		=> 'width: 275px;',
-			  'value'		=> $email
-            );			
-			echo '<div class="input-prepend"> <span class="add-on">E-mail</span>'.form_input($data);
-			echo form_error('email', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-			echo '</div><br>';
-			
-			$data = array(
-              'name'        => 'senha',
-              'id'          => 'senha',
-			  'type'		=> 'password',
-			  'value'		=> $senha
-            );			
-			echo '<div class="input-prepend" style="float: left; margin-right: 20px;"> <span class="add-on">Senha</span>'.form_input($data);
-			echo form_error('senha', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-			echo '</div>';
-			
-			$data = array(
-              'name'        => 'senhaconf',
-              'id'          => 'senhaconf',
-			  'type'		=> 'password',
-			  'value'		=> $senha
-            );			
-			echo '<div class="input-prepend"> <span class="add-on">Confirmar Senha</span>'.form_input($data);
-			echo form_error('senhaconf', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-			echo '</div><br>';
-			
-			$data = array(
-              'name'        => 'nome',
-              'id'          => 'prependedInput',
-			  'type'		=> 'text',
-			  'style'		=> 'width: 210px;',
-			  'value'		=> $nome
-            );			
-			echo '<div class="input-prepend" style="float: left; margin-right: 20px;"> <span class="add-on">Nome</span>'.form_input($data);
-			echo form_error('nome', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-			echo '</div>';
+	$base = $this->config->item('base_url');
+?>
 
-			$data = array(
-              'name'        => 'cpf',
-              'id'          => 'prependedInput',
-			  'type'		=> 'text',
-			  'style'		=> 'width: 210px;',
-			  'value'		=> $cpf
-            );			
-			echo '<div class="input-prepend" style="float: left; margin-right: 20px;"> <span class="add-on">CPF</span>'.form_input($data);
-			echo form_error('cpf', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-			echo '</div>';
+<div class="all-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
 
-			$data = array(
-              'name'        => 'telefone',
-              'id'          => 'prependedInput',
-			  'type'		=> 'text',
-			  'style'		=> 'width: 210px;',
-			  'value'		=> $telefone
-            );			
-			echo '<div class="input-prepend" style="float: left; margin-right: 20px;"> <span class="add-on">Telefone</span>'.form_input($data);
-			echo form_error('telefone', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-			echo '</div>';
+      <div class="side-bar-wrapper collapse navbar-collapse navbar-ex1-collapse">
+        <a href="#" class="logo hidden-sm hidden-xs">
+          <i class="icon-shopping-cart"></i>
+          <span>Prosumidor</span>
+        </a>
+      </div>
+    </div>
 
-			$data = array(
-              'name'        => 'endereco',
-              'id'          => 'prependedInput',
-			  'type'		=> 'text',
-			  'style'		=> 'width: 210px;',
-			  'value'		=> $endereco
-            );			
-			echo '<div class="input-prepend" style="float: left; margin-right: 20px;"> <span class="add-on">Endereco</span>'.form_input($data);
-			echo form_error('endereco', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-			echo '</div>';
+    <div class="col-md-12">
+      <div class="content-wrapper wood-wrapper">
+        <div class="content-inner">
+          <div class="page-header page-header-dark-blue">
+            <h1><i class="icon-bar-chart"></i> Usuários</h1>
+          </div>
 
-			$options = array(
-					  'Masculino'		=> 'Masculino',
-					  'Feminino' 		=> 'Feminino'
-					);
-			$js = 'id="sexo" class="input"';
-			echo '<div class="input-prepend"> <span class="add-on">Tipo</span>'.form_dropdown('sexo', $options, $sexo, $js);
-			echo '</div><br>';
+          <div class="main-content">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="widget">
+                  <div class="widget-content-white glossed">
+                    <div class="padded">
+						<?php 			
+							echo form_open();
 
-			$options = array(
-					  '1'		=> 'Consumidor',
-					  '2' 		=> 'Vendendor',
-					  '3'		=> 'Prosumidor'
-					);
-			$js = 'id="tipo" class="input"';
-			echo '<div class="input-prepend"> <span class="add-on">Tipo</span>'.form_dropdown('tipo', $options, $tipo, $js);
-			echo '</div><br>';
+							echo '<h3 class="form-title form-title-first"><i class="icon-terminal"></i> Cadastrar novo usuário</h3>';
+							echo '<div class="row">';
+							
+							$data = array(
+					          'name'        => 'email',
+							  'type'		=> 'email',
+							  'class'		=> 'form-control',
+							  'value'		=> $email
+					        );			
+							echo '<div class="col-md-4"><div class="form-group"><label>E-Mail</label>'.form_input($data);
+							echo form_error('email', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
+							echo '</div></div>';
+							
+							$data = array(
+					          'name'        => 'senha',
+					          'id'          => 'senha',
+							  'type'		=> 'password',
+							  'class'		=> 'form-control',
+							  'value'		=> $senha
+					        );			
+							echo '<div class="col-md-4"><div class="form-group"><label>Senha</label>'.form_input($data);
+							echo form_error('senha', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
+							echo '</div></div>';
+							
+							$data = array(
+					          'name'        => 'senhaconf',
+					          'id'          => 'senhaconf',
+							  'type'		=> 'password',
+							  'class'		=> 'form-control',
+							  'value'		=> $senha
+					        );			
+							echo '<div class="col-md-4"><div class="form-group"><label>Confirmar Senha</label>'.form_input($data);
+							echo form_error('senhaconf', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
+							echo '</div></div>';
+
+							echo '</div><div class="row">';
+							
+							$data = array(
+					          'name'        => 'nome',
+					          'id'          => 'prependedInput',
+							  'type'		=> 'text',
+							  'class'		=> 'form-control',
+							  'value'		=> $nome
+					        );			
+							echo '<div class="col-md-8"><div class="form-group"><label>Nome Completo</label>'.form_input($data);
+							echo form_error('nome', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
+							echo '</div></div>';
+
+							$data = array(
+					          'name'        => 'cpf',
+					          'id'          => 'prependedInput',
+							  'type'		=> 'text',
+							  'class'		=> 'form-control',
+							  'value'		=> $cpf
+					        );			
+							echo '<div class="col-md-4"><div class="form-group"><label>CPF</label>'.form_input($data);
+							echo form_error('cpf', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
+							echo '</div></div>';
+
+							echo '</div><div class="row">';
+
+							$data = array(
+					          'name'        => 'endereco',
+					          'id'          => 'prependedInput',
+							  'type'		=> 'text',
+							  'class'		=> 'form-control',
+							  'value'		=> $endereco
+					        );			
+							echo '<div class="col-md-8"><div class="form-group"><label>Endereço</label>'.form_input($data);
+							echo form_error('endereco', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
+							echo '</div></div>';
+
+							$data = array(
+					          'name'        => 'telefone',
+					          'id'          => 'prependedInput',
+							  'type'		=> 'text',
+							  'class'		=> 'form-control',
+							  'value'		=> $telefone
+					        );			
+							echo '<div class="col-md-4"><div class="form-group"><label>Telefone</label>'.form_input($data);
+							echo form_error('telefone', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
+							echo '</div></div>';
+
+							echo '</div><div class="row">';
+
+							$options = array(
+									  'Masculino'		=> 'Masculino',
+									  'Feminino' 		=> 'Feminino'
+									);
+							$js = 'id="sexo" class="form-control"';
+							echo '<div class="col-md-6"><div class="form-group"><label>Sexo</label>'.form_dropdown('sexo', $options, $sexo, $js);
+							echo '</div></div>';
+
+							$options = array(
+									  '1'		=> 'Consumidor',
+									  '2' 		=> 'Vendendor',
+									  '3'		=> 'Prosumidor'
+									);
+							$js = 'id="tipo" class="form-control"';
+							echo '<div class="col-md-6"><div class="form-group"><label>Tipo</label>'.form_dropdown('tipo', $options, $tipo, $js);
+							echo '</div></div>';
+
+							echo '</div>';
 
 
-			$data = array(
-			  'type'		=> 'submit',
-              'name'        => 'submit',
-              'id'          => 'submit',
-              'class'       => 'btn btn-info',
-			  'value' 		=> 'Concluir',
-			  'onclick'  	=> 'setTimeout(twoClicks, 1);'
-            );
-			echo form_input($data);
-			
-			form_close();
+							$data = array(
+							  'type'		=> 'submit',
+					          'name'        => 'submit',
+					          'id'          => 'submit',
+					          'class'       => 'btn btn-primary',
+							  'value' 		=> 'Concluir',
+							  'onclick'  	=> 'setTimeout(twoClicks, 1);'
+					        );
+							echo form_input($data);
+							
+							form_close();
 
-			echo '&nbsp;<a href="'.$base.'prosumidor/login" class="btn btn-danger">Voltar</a>';
-		?>
-	</div>
-</body>
-</html>
+							echo '&nbsp;<a href="'.$base.'prosumidor/login" class="btn btn-danger">Cancelar</a>';
+						?>
+                 	</div>
+                    <div class="col-md-6">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php $this->load->view('pages/footer.php'); ?>
