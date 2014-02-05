@@ -53,7 +53,7 @@
 				$data = array(
 				  'type'		=> 'submit',
 	              'id'          => 'submit',
-	              'class'       => 'btn btn-large btn-info submit',
+	              'class'       => 'btn btn-primary',
 				  'value' 		=> 'Entrar',
 			  	  'onclick'  	=> 'setTimeout(twoClicks, 1);'
 	            );
