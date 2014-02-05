@@ -6,7 +6,7 @@
 
 <div class="all-wrapper no-menu-wrapper">
   <div class="login-logo-w">
-    <a href="index.html" class="logo">
+    <a href="#" class="logo">
       <i class="icon-cloud-download"></i>
       <span>Prosumidor</span>
     </a>
