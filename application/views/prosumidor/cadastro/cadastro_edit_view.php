@@ -16,12 +16,12 @@
         </button>
       </div>
 
-      <div class="side-bar-wrapper collapse navbar-collapse navbar-ex1-collapse">
-        <a href="#" class="logo hidden-sm hidden-xs">
-          <i class="icon-shopping-cart"></i>
-          <span>Prosumidor</span>
-        </a>
-      </div>
+	  <div class="login-logo-w">
+	    <a class="logo">
+	      <i class="icon-shopping-cart"></i>
+	      <span>Prosumidor</span>
+	    </a>
+	  </div>
     </div>
 
     <div class="col-md-12">

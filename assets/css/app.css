@@ -6216,15 +6216,16 @@ td.visible-print {
   margin-bottom: 20px;
 }
 .login-logo-w .logo i {
-  font-size: 90px;
+  font-size: 60px;
   text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
 }
 .login-logo-w .logo span {
   font-size: 40px;
   text-transform: uppercase;
   font-family: "Oswald", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  display: block;
+  display: inline;
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.6);
+  margin-left: 20px;
 }
 @media (max-width: 768px) {
   .login-logo-w .logo i {
