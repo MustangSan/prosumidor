@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2014 at 12:10 PM
+-- Generation Time: Feb 05, 2014 at 08:59 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `administrador` (
 
 INSERT INTO `administrador` (`idAdministrador`, `email`, `senha`, `nome`) VALUES
 (1, 'zangetsu@bleach.com', 'f79358f48201e819d483c111a21c8d0d', 'Zangetsu Mustang'),
-(6, 'guilherme.raminho@gmail.com', '69d6e594c903fdcef0308f33151b1c36', 'Guilherme O Raminho'),
+(6, 'guilherme.raminho@gmail.com', 'f79358f48201e819d483c111a21c8d0d', 'Guilherme O Raminho'),
 (10, 'teste@teste.com', 'f5d1278e8109edd94e1e4197e04873b9', 'Teste');
 
 -- --------------------------------------------------------
@@ -174,19 +174,20 @@ INSERT INTO `produto` (`idProduto`, `nome`, `preco`, `validade`, `unidade`, `dis
 CREATE TABLE IF NOT EXISTS `propriedade` (
   `idPropriedade` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
-  `endereco` varchar(45) NOT NULL,
+  `endereco` varchar(150) NOT NULL,
   `tamanho` varchar(45) DEFAULT NULL,
   `idProsumidor` int(11) NOT NULL,
   PRIMARY KEY (`idPropriedade`),
   KEY `idProsumidor_idx` (`idProsumidor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `propriedade`
 --
 
 INSERT INTO `propriedade` (`idPropriedade`, `nome`, `endereco`, `tamanho`, `idProsumidor`) VALUES
-(1, 'Chacra do Zan', 'Arataquinha da Serra', '2200km', 2);
+(1, 'Chacra do Zan', 'Arataquinha da Serra', '2200km', 2),
+(3, 'Tibia', 'Ank', '20000cubinhos', 1);
 
 -- --------------------------------------------------------
 
@@ -208,17 +209,18 @@ CREATE TABLE IF NOT EXISTS `prosumidor` (
   `saldoConsumidor` float NOT NULL,
   PRIMARY KEY (`idProsumidor`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `prosumidor`
 --
 
 INSERT INTO `prosumidor` (`idProsumidor`, `email`, `senha`, `nome`, `cpf`, `telefone`, `endereco`, `sexo`, `status`, `tipo`, `saldoConsumidor`) VALUES
-(1, 'guilherme.raminho@gmail.com', 'f79358f48201e819d483c111a21c8d0d', 'Guilherme Raminho', '099.845.046-46', '(31)9999-9999', 'Rua: 2 n:3 B:Norte', 'Masculino', 1, 3, 0),
-(2, 'zangetsu@bleach.com', 'f79358f48201e819d483c111a21c8d0d', 'Zangetsu', '09984504646', '(31)8888-8888', 'Rua: 7 n:7 B:Seven', 'Masculino', 1, 3, 0),
-(3, 'teste@teste.com', 'f5d1278e8109edd94e1e4197e04873b9', 'Teste', '567.567.567-89', '(31)9090-9090', 'R:4, n:8, B;bis', 'Masculino', 1, 1, 0),
-(4, 'leo@leo.com', 'fe764ea41443c5f9d56627de190d2273', 'Leo Coelho', '123.000.789-77', '(31)8888-7777', 'Rua: 6 n:6 B:Six', 'Masculino', 1, 2, 0);
+(1, 'guilherme.raminho@gmail.com', 'f79358f48201e819d483c111a21c8d0d', 'Guilherme Raminho', '099.845.046-46', '(31)9999-9999', 'Rua: 2 n:3 B:Norte', 'Masculino', 1, 2, 0),
+(2, 'zangetsu@bleach.com', 'f79358f48201e819d483c111a21c8d0d', 'Zangetsu', '09984504646', '(31)8888-8888', 'Rua: 7 n:7 B:Seven', 'Masculino', 1, 2, 0),
+(3, 'teste@teste.com', 'f5d1278e8109edd94e1e4197e04873b9', 'Teste', '567.567.567-89', '(31)9090-9090', 'R:4, n:8, B;bis', 'Masculino', 1, 1, -23.23),
+(4, 'leo@leo.com', 'fe764ea41443c5f9d56627de190d2273', 'Leo Coelho', '123.000.789-77', '(31)8888-7777', 'Rua: 6 n:6 B:Six', 'Masculino', 1, 2, 0),
+(5, 'luan.noe@gmail.com', 'f79358f48201e819d483c111a21c8d0d', 'Luan Noe', '09876543211', '(31)9999-3434', 'Aquela rua ali', 'Masculino', 1, 2, 0);
 
 --
 -- Constraints for dumped tables
