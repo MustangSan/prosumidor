@@ -60,10 +60,10 @@
 				
 				form_close();
 
-				if (isset($result) && $result == 'loginErro')
-					echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>E-mail ou senha estão incorretos!</div>';
-
 				echo '&nbsp;<a href="'.$base.'prosumidor/cadastro/" class="btn btn-info"><i class="icon-edit"></i> Cadastrar</a>';
+
+				if (isset($result) && $result == 'loginErro')
+					echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>E-mail ou senha estão incorretos!</div>'
 			?>
             </div>
           </div>

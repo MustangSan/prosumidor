@@ -33,41 +33,41 @@
                   <div class="widget-content-white glossed">
                     <div class="padded">
                     	<div class="widget-controls pull-right">
-			              <a href="<?php echo $base; ?>prosumidor/propriedades/inserirPropriedade/"><i class="icon-plus-sign"></i></a>
-			            </div>
+			                  <a href="<?php echo $base; ?>prosumidor/propriedades/inserirPropriedade/"><i class="icon-plus-sign"></i></a>
+			                </div>
                     	<h3 class="form-title form-title-first"><i class="icon-tags"></i> Terras Cadastradas</h3>
                     	<div class="table-responsive">
-						<table class="table table-striped table-bordered table-hover">
-							<thead>
-							  <tr>
-							    <th>Nome</th>
-							    <th>Endereco</th>
-							    <th>Tamanho</th>
-							    <th width="40">Editar</th>
-							    <th width="40">Remover</th>
+          						<table class="table table-striped table-bordered table-hover">
+          							<thead>
+          							  <tr>
+          							    <th>Nome</th>
+          							    <th>Endereco</th>
+          							    <th>Tamanho</th>
+          							    <th width="40">Editar</th>
+          							    <th width="40">Remover</th>
 
-							  </tr>
-							</thead>
-							<tbody>
-								<?php 
-									if(isset($propriedades)){
-										foreach($propriedades as $a){	
-											echo '<tr>';
-											echo '<td>'.$a->getNome().'</td>';
-											echo '<td>'.$a->getEndereco().'</td>';
-											echo '<td>'.$a->getTamanho().'</td>';
-											echo '<td><a href="'.$base.'prosumidor/propriedades/editarPropriedade/'.$a->getIdPropriedade().'"><center><i class="icon-edit"></i></center></a></td>';
-											echo '<td><a href="'.$base.'prosumidor/propriedades/removerPropriedade/'.$a->getIdPropriedade().'"><center><i class="icon-minus-sign"></i></center></td>';
-											echo '</tr>';
-										}
-									}
-								?>
-							</tbody>
-						</table>
-						</div>
+          							  </tr>
+          							</thead>
+          							<tbody>
+          								<?php 
+          									if(isset($propriedades)){
+          										foreach($propriedades as $a){	
+          											echo '<tr>';
+          											echo '<td>'.$a->getNome().'</td>';
+          											echo '<td>'.$a->getEndereco().'</td>';
+          											echo '<td>'.$a->getTamanho().'</td>';
+          											echo '<td><a href="'.$base.'prosumidor/propriedades/editarPropriedade/'.$a->getIdPropriedade().'"><center><i class="icon-edit"></i></center></a></td>';
+          											echo '<td><a href="'.$base.'prosumidor/propriedades/removerPropriedade/'.$a->getIdPropriedade().'"><center><i class="icon-minus-sign"></i></center></td>';
+          											echo '</tr>';
+          										}
+          									}
+          								?>
+          							</tbody>
+          						</table>
+          						</div>
                  	</div>
-                    <div class="col-md-6">
-                    </div>
+                  <div class="col-md-6">
+                  </div>
                   </div>
                 </div>
               </div>
