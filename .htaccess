@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteCond $1 !^(index\.php|css|js|img|images|ckeditor|files|robots\.txt)
+RewriteCond $1 !^(index\.php|css|js|img|images|ckeditor|assets|files|robots\.txt)
 RewriteRule ^(.*)$ index.php/$1 [L]
 
 <IfModule php5_module>

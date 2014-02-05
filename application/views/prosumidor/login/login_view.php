@@ -1,41 +1,55 @@
 <?php 
+	$this->load->view('pages/header.php');
+
 	$base = $this->config->item('base_url');
 ?>
 
-<html>
-<body>
-	<div>
-		<h1>Prosumidor</h1>
-	</div>
-	<div class="box">
-        <div class="box-center" style="margin-top: 35px;">
-			<h2>Login Prosumidor</h2>
+<div class="all-wrapper no-menu-wrapper">
+  <div class="login-logo-w">
+    <a href="index.html" class="logo">
+      <i class="icon-cloud-download"></i>
+      <span>Prosumidor</span>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+
+      <div class="content-wrapper bold-shadow wood-wrapper">
+        <div class="content-inner">
+          <div class="main-content main-content-grey-gradient no-page-header">
+            <div class="main-content-inner">
 			<?php 
 
 				echo form_open();
+
+				echo '<h3 class="form-title form-title-first"><i class="icon-lock"></i> Login do Prosumidor</h3>';
 				
 				$data = array(
-	              'class'       => 'input',
+	              'class'       => 'form-control',
 	              'name'        => 'email',
 	              'id'          => 'email',
 				  'type'		=> 'text',
-				  'placeholder'	=> 'E-mail'
+				  'placeholder'	=> 'Coloque seu e-mail'
 	            );
+	            echo '<div class="form-group">
+                <label>Usuário</label>';
 				echo form_input($data);
-				echo '<br>';
 				echo form_error('email', '<div rel="tooltip" class="fieldErrorLogin" title="', '" ><i class="icon-warning-sign" rel="tooltip"></i></div>');
 				
 				$data = array(
-	              'class'       => 'input',
+	              'class'       => 'form-control',
 	              'name'        => 'senha',
 	              'id'          => 'senha',
 				  'type'		=> 'password',
-				  'placeholder'	=> 'Senha'
+				  'placeholder'	=> 'Coloque sua senha'
 	            );
+	            echo '</div>
+                <div class="form-group">
+                <label>Senha</label>';
 				echo form_input($data);
-				echo '<br>';
 				echo form_error('senha', '<div rel="tooltip" class="fieldErrorLogin" title="', '" ><i class="icon-warning-sign" rel="tooltip"></i></div>');
-				
+				echo '</div>';
+
 				$data = array(
 				  'type'		=> 'submit',
 	              'id'          => 'submit',
@@ -47,8 +61,11 @@
 				
 				form_close();
 			?>
-        </div>
-	</div>
+
+
+
+
+
 
 	<?php 			
 		if (isset($result) && $result == 'loginErro')
@@ -56,9 +73,5 @@
 
 		echo '&nbsp;<a href="'.$base.'prosumidor/cadastro/" class="btn btn-danger">Cadastrar</a>';
 	?>
-    <!--script>
-        //Placeholder Cross-Browser
-        $('input[placeholder], textarea[placeholder]').placeholder();
-    </script-->
-</body>
-</html>
+
+<?php $this->load->view('pages/footer.php'); ?>
