@@ -28,7 +28,7 @@
       <div class="content-wrapper wood-wrapper">
         <div class="content-inner">
           <div class="page-header page-header-dark-blue">
-            <h1><i class="icon-bar-chart"></i> Usuários</h1>
+            <h1><i class="icon-user"></i> Usuários</h1>
           </div>
 
           <div class="main-content">
