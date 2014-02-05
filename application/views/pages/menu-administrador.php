@@ -12,7 +12,7 @@
 
       <ul class="side-menu">
         <li class="<?php echo($this->uri->segment(2)==='inicio')?'current':'' ?>">
-          <a href="<?php echo $base ?>prosumidor/inicio">
+          <a href="<?php echo $base ?>administracao/inicio">
             <i class="icon-home"></i> Início
           </a>
         </li>
