@@ -25,25 +25,25 @@
               <i class="icon-edit"></i> Editar Perfil
             </a>
           </li>
-
-          <li class="<?php echo($this->uri->segment(2)==='propriedades')?'current':'' ?>">
-            <a href="<?php echo $base ?>prosumidor/propriedades">
-              <i class="icon-map-marker"></i> Minhas Terras
-            </a>
-          </li>
-
+        <?php if($this->session->userdata('tipo') == 2){
+          echo '<li class="'.(($this->uri->segment(2)==='propriedades')?'current':'').'">';
+            echo '<a href="'.$base.'prosumidor/propriedades">';
+              echo '<i class="icon-map-marker"></i> Minhas Terras';
+            echo '</a>';
+          echo '</li>';
+        }?>
           <li class="<?php echo($this->uri->segment(2)==='comprar')?'current':'' ?>">
             <a href="<?php echo $base ?>prosumidor/comprar">
               <i class="icon-credit-card"></i> Comprar
             </a>
           </li>
-
-          <li class="<?php echo($this->uri->segment(2)==='vender')?'current':'' ?>">
-            <a href="<?php echo $base ?>prosumidor/vender">
-              <i class="icon-truck"></i> Vender
-            </a>
-          </li>
-
+        <?php if($this->session->userdata('tipo') == 2){
+          echo '<li class="'.(($this->uri->segment(2)==='vender')?'current':'').' ">';
+            echo '<a href="'.$base.'prosumidor/vender">';
+              echo '<i class="icon-truck"></i> Vender';
+            echo '</a>';
+          echo '</li>';
+        }?>
           <li>
             <a href="<?php echo $base ?>prosumidor/logout">
               <i class="icon-signin"></i> Sair
