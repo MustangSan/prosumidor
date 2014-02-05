@@ -154,6 +154,52 @@ class Propriedade_model extends CI_Model {
 		}
 		return NULL;
 	}
+
+	/** 
+	*  Lista todos as propriedades retornando um array com todos os itens cadastrados no banco de dados.
+	*  Se a função for chamada sem parâmetros, considera que o usuário quer listar todos os itens.
+	*/
+	public function listarPropriedadesIdProsumidor($idProsumidor, $limit = 0, $start = 0) {
+
+		// Caso não seja passado nenhum valor limite como parâmetro, inicia a variável com o número total de propriedades cadastradas no banco de dados
+		if ($limit == 0) {
+			$limit = $this->db->count_all("propriedade");
+		}
+		
+		// Inicia a transação
+		$this->db->trans_start();
+
+		$this->db->where('idProsumidor', $idProsumidor);
+		
+		$this->db->order_by('nome ASC');
+		$this->db->limit($limit, $start);
+		
+		// Realiza a pesquisa no banco de dados e joga os dados na query	
+		$query = $this->db->get('propriedade');
+			
+		// Finaliza a transação e fecha a conexão
+		$this->db->trans_complete();
+		$this->db->close();
+		
+		$propriedades = array();
+		
+		// Verifica se encontrou alguma propriedade na query
+		if ($query->num_rows() > 0  ) {
+
+			// Joga os resultados dentro da variável $propriedades
+			foreach ($query->result() as $row) {
+				$propriedades[] = new Propriedade(	$row->idPropriedade,
+													$row->nome,	
+													$row->endereco,
+													$row->tamanho,
+													$row->idProsumidor );
+			}
+
+			// Retorna o array com todos as propriedades encontrados
+			return $propriedades;
+		}
+		return NULL;
+	}
 	
 	/** 
 	*  Obtém todos os dados da propriedade baseado no código recebido como parâmetro.

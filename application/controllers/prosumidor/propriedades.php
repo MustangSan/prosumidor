@@ -38,7 +38,7 @@ class Propriedades extends CI_Controller {
  			redirect('prosumidor/inicio', 'refresh');
  		}
 	 	// Salva na variável $data os itens que serão carregados
-        $data['propriedades'] = $this->Propriedade_model->listarPropriedades();
+        $data['propriedades'] = $this->Propriedade_model->listarPropriedadesIdProsumidor($this->session->userdata('idProsumidor'));
 		 
 	 	// Carrega a view que lista todos as propriedades na tela
     	$this->load->view('prosumidor/propriedades/propriedades_list_view', $data);
