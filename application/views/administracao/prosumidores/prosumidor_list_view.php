@@ -67,11 +67,8 @@
 												if($a->getStatus() == 2 )
 													echo '<td>Bloqueado</td>';
 
-											//Listar Propriedades se for vendedor
-											if($a->getTipo() == 2 )
-													echo '<td><a href="'.$base.'administracao/prosumidores/listarPropriedades/'.$a->getIdProsumidor().'"><center><i class="icon-info-sign"></i></center></a></td>';
-											else
-												echo '<td></td>';
+											//Mostrar dados do prosumidor
+											echo '<td><a href="'.$base.'administracao/prosumidores/listarDados/'.$a->getIdProsumidor().'"><center><i class="icon-info-sign"></i></center></a></td>';
 
 											//Bloquear ou desbloquear dependendo do status
 											if($a->getStatus() == 1 )

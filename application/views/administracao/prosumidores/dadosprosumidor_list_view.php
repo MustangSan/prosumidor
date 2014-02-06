@@ -32,6 +32,29 @@
                 <div class="widget">
                   <div class="widget-content-white glossed">
                     <div class="padded">
+                    	<div>
+                    	<h3 class="form-title form-title-first"><i class="icon-map-marker"></i> Dados Usuario</h3>
+                    	<?php
+                      echo $prosumidor->getNome();
+                      echo $prosumidor->getEmail();
+                      echo $prosumidor->getCPF();
+                      echo $prosumidor->getEndereco();
+                      echo $prosumidor->getTelefone();
+                      echo $prosumidor->getSexo();
+                      //Status
+                      if($prosumidor->getStatus() == 1 )
+                        echo '<td>Normal</td>';
+                      else 
+                        if($prosumidor->getStatus() == 2 )
+                          echo '<td>Bloqueado</td>';
+                      if($prosumidor->getTipo() == 1 )
+                        echo '<td>Consumidor</td>';
+                      else 
+                        if($prosumidor->getTipo() == 2 )
+                          echo '<td>Prosumidor</td>'; 
+                      echo $prosumidor->getSaldoConsumidor();
+                      ?>
+                    	</div>
                     	<h3 class="form-title form-title-first"><i class="icon-map-marker"></i> Propriedades Cadastradas</h3>
                     	<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover">

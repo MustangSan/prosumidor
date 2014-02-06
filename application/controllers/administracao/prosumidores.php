@@ -41,13 +41,15 @@ class Prosumidores extends CI_Controller {
     	$this->load->view('administracao/prosumidores/prosumidor_list_view', $data);
     }
 
-    public function listarPropriedades($idProsumidor){
+    public function listarDados($idProsumidor){
 
-    	$data['prosumidor'] = $this->Prosumidor_model->getProsumidor($idProsumidor);
-    	$data['propriedades'] = $this->Propriedade_model->listarPropriedadesIdProsumidor($idProsumidor);
+        $prosumidor = $this->Prosumidor_model->getProsumidor($idProsumidor);
+    	$data['prosumidor'] = $prosumidor;
+        if($prosumidor->getTipo() == 2)
+    	   $data['propriedades'] = $this->Propriedade_model->listarPropriedadesIdProsumidor($idProsumidor);
 		 
 	 	// Carrega a view que lista todos as propriedades na tela
-    	$this->load->view('administracao/prosumidores/propriedades_list_view', $data);
+    	$this->load->view('administracao/prosumidores/dadosprosumidor_list_view', $data);
     }
 
     public function desbloquear($idProsumidor){
