@@ -43,7 +43,10 @@ class Pedido_model extends CI_Model {
 			$dados = array ('idPedido'		=> $pedido->getIdPedido(),
 							'valorTotal' 	=> $pedido->getValorTotal(),
 							'validacao' 	=> $pedido->getValidacao(),
-							'data' 			=> $pedido->getData());
+							'data' 			=> $pedido->getData(),
+							'idProsumidor'	=> $pedido->getIdProsumidor()
+							);
+
 			$this->db->insert('pedido', $dados);
 						
 			// Finaliza a transação e fecha a conexão
@@ -69,7 +72,9 @@ class Pedido_model extends CI_Model {
 			$dados = array ('idPedido'		=> $pedido->getIdPedido(),
 							'valorTotal' 	=> $pedido->getValorTotal(),
 							'validacao' 	=> $pedido->getValidacao(),
-							'data' 			=> $pedido->getData());
+							'data' 			=> $pedido->getData(),
+							'idProsumidor'	=> $pedido->getIdProsumidor()
+							);
 		
 			// Pesquisa se existe a pedido no banco de dados
 			$this->db->where('idPedido', $pedido->getIdPedido());
@@ -90,27 +95,23 @@ class Pedido_model extends CI_Model {
 	/**
 	 * Remove uma pedido no banco de dados
 	 */
-	public function deletePedido($pedido) {
+	public function deletePedido($idPedido) {
 
-		// O parâmetro da função deve ser um objeto do tipo 'Pedido'
-		if($pedido instanceof Pedido){
-			$this->db->trans_status();
+		$this->db->trans_status();
 
-			// Pesquisa se existe a pedido no banco de dados
-			$this->db->where('idPedido', $pedido->getIdPedido());
+		// Pesquisa se existe a pedido no banco de dados
+		$this->db->where('idPedido', $idPedido);
 
-			// Deleta o pedido do banco de dados
-			$this->db->delete('pedido');
-			
-			// Finaliza a transação e fecha a conexão
-			$this->db->trans_complete();
-			$this->db->close();
-			
-			if($this->db->trans_status())
-				return TRUE;
-			return FALSE;
-
-		}
+		// Deleta o pedido do banco de dados
+		$this->db->delete('pedido');
+		
+		// Finaliza a transação e fecha a conexão
+		$this->db->trans_complete();
+		$this->db->close();
+		
+		if($this->db->trans_status())
+			return TRUE;
+		return FALSE;
 	}
 	
 	/** 
@@ -147,7 +148,9 @@ class Pedido_model extends CI_Model {
 				$pedidos[] = new Pedido(	$row->idPedido,
 											$row->valorTotal,	
 											$row->validacao,
-											$row->data );
+											$row->data,
+											$row->idProsumidor
+										);
 			}
 
 			// Retorna o array com todos as pedidos encontrados
@@ -184,7 +187,9 @@ class Pedido_model extends CI_Model {
 		return new Pedido(	$row->idPedido,
 							$row->valorTotal,	
 							$row->validacao,
-							$row->data );
+							$row->data,
+							$row->idProsumidor
+						);
   	}
 	
 	/** 

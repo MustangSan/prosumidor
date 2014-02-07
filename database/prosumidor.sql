@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2014 at 08:59 PM
+-- Generation Time: Feb 06, 2014 at 02:20 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `nome`, `descricao`) VALUES
-(1, 'Plantas', 'Plantas sao do reina plantatis, servem pra comer'),
-(2, 'Comida', 'serve pra matar fome'),
-(3, 'Mato', 'Do tipo gramideo ruim, verde serve pra boi comer'),
-(4, 'Info', 'gasta energia e tem partes eletronicas mano'),
-(6, 'Frutas', 'comida natural mano');
+(1, 'Sem  Glútem', 'Forevis aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Copo furadis é disculpa de babadis, arcu quam euismod magna, bibendum egestas augue arcu ut est. Etiam ultricies tincidunt ligula, sed accumsan sapien mollis et.'),
+(2, 'Hortifruti', 'Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.'),
+(3, 'Congelados', 'Paisis, filhis, espiritis santis. Mé faiz elementum girarzis. Pellentesque viverra accumsan ipsum elementum gravidis.'),
+(4, 'Diversos', 'Cevadis im ampola pa arma uma pindureta. Nam varius eleifend orci, sed viverra nisl condimentum ut. Donec eget justis enim. Atirei o pau no gatis. Viva Forevis aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'),
+(6, 'Padaria', 'Copo furadis é disculpa de babadis, arcu quam euismod magna, bibendum egestas augue arcu ut est. Delegadis gente finis. In sit amet mattis porris, paradis.');
 
 -- --------------------------------------------------------
 
@@ -86,10 +86,10 @@ CREATE TABLE IF NOT EXISTS `classificacao` (
 --
 
 INSERT INTO `classificacao` (`idClassificacao`, `nome`, `descricao`) VALUES
-(2, 'carnivora', 'que come carne, esse sabe o que eh bom'),
-(3, 'herbivora', 'come tudo que eh verde, ruim demais'),
-(4, 'onivoro', 'come a porra toda'),
-(5, 'verde', 'produto que eh da cor verde');
+(2, 'Agroecológico', 'Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.'),
+(3, 'Solidário', 'Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi.'),
+(4, 'Orgânico', 'Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.'),
+(5, 'Familiar', 'Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis.');
 
 -- --------------------------------------------------------
 
@@ -103,6 +103,18 @@ CREATE TABLE IF NOT EXISTS `classproduto` (
   KEY `idProduto_idx` (`idProduto`),
   KEY `idClassificacao_idx` (`idClassificacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `classproduto`
+--
+
+INSERT INTO `classproduto` (`idProduto`, `idClassificacao`) VALUES
+(8, 5),
+(10, 4),
+(8, 5),
+(9, 5),
+(6, 5),
+(6, 3);
 
 -- --------------------------------------------------------
 
@@ -130,8 +142,10 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `idPedido` int(11) NOT NULL AUTO_INCREMENT,
   `valorTotal` float NOT NULL,
   `validacao` int(11) NOT NULL,
-  `data` date NOT NULL,
-  PRIMARY KEY (`idPedido`)
+  `data` varchar(11) NOT NULL,
+  `idProsumidor` int(10) NOT NULL,
+  PRIMARY KEY (`idPedido`),
+  KEY `idProsumidor_idx` (`idProsumidor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -159,11 +173,11 @@ CREATE TABLE IF NOT EXISTS `produto` (
 --
 
 INSERT INTO `produto` (`idProduto`, `nome`, `preco`, `validade`, `unidade`, `disponibilidade`, `descricao`, `idCategoria`, `foto`) VALUES
-(6, 'Hamburguer', 11, 'nao tem', 'nao tem', 1, 'burgao gostoso demais da conta so', 2, 'ico-lanches1.jpg'),
+(6, 'Hamburguer', 11, 'nao tem', 'nao tem', 1, 'burgao gostoso demais da conta so', 6, 'ico-lanches1.jpg'),
 (7, 'Computador', 2000, 'nao tem', 'nao tem', 1, 'Pc Dell Mano', 4, 'pcdell2.jpg'),
-(8, 'Caixas', 200, 'nao tem', '1kg cada', 1, 'serve rpa estocar altas parafenais', 3, 'caixas1.png'),
+(8, 'Caixas', 200, 'nao tem', '1kg cada', 1, 'serve rpa estocar altas parafenais', 4, 'caixas1.png'),
 (9, 'Carrinho', 23, '5 anos', 'nao tem', 1, 'carrinho de compra', 4, 'produtos-icon1.png'),
-(10, 'Alface', 0.75, '7 dias', 'treco', 1, 'treco verde de comer com azeite e sal.', 3, 'produtos-icon2.png');
+(10, 'Alface', 0.75, '7 dias', 'treco', 1, 'treco verde de comer com azeite e sal.', 2, 'produtos-icon2.png');
 
 -- --------------------------------------------------------
 
@@ -238,6 +252,12 @@ ALTER TABLE `classproduto`
 --
 ALTER TABLE `compra`
   ADD CONSTRAINT `idPedido` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `idProsumido` FOREIGN KEY (`idProsumidor`) REFERENCES `prosumidor` (`idProsumidor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `produto`

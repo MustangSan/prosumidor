@@ -15,16 +15,17 @@ class Pedido {
 	private $valorTotal;
 	private $validacao;
 	private $data;
+	private $idProsumidor;
 	
 	/**
 	 * Construtor
 	 */
-	public function __construct($idPedido, $valorTotal, $validacao, $data) {
+	public function __construct($idPedido, $valorTotal, $validacao, $data, $idProsumidor) {
 		$this->setIdPedido($idPedido);
 		$this->setValorTotal($valorTotal);
 		$this->setValidacao($validacao);
 		$this->setData($data);
-
+		$this->setIdProsumidor($idProsumidor);
 	}
 
 	/**
@@ -44,7 +45,10 @@ class Pedido {
 
 	public function getData(){
 		return $this->data;
-	}		
+	}
+	public function getIdProsumidor(){
+		return $this->idProsumidor;
+	}
 
 	/**
 	 * Setters
@@ -63,6 +67,10 @@ class Pedido {
 
 	public function setData($newValue){
 		$this->data = $newValue;
+	}
+
+	public function setIdProsumidor($newValue){
+		$this->idProsumidor = $newValue;
 	}
 
 }
