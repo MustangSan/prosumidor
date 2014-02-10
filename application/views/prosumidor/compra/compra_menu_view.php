@@ -1,23 +1,7 @@
 <?php 		
 	$this->load->view('pages/header.php');
 	$base = $this->config->item('base_url');
-	
-	if ($this->uri->segment(2) == 'editar')
-		$readonly = 'readonly';
-	else
-		$readonly = '';
 ?>
-
-<script>
-	function habilitarSenha() {
-		var field = document.getElementById("senha");
-		field.readOnly=false;
-		field.value='';
-		var field = document.getElementById("senhaconf");
-		field.readOnly=false;
-		field.value='';
-	}
-</script>
 
 <div class="all-wrapper">
   <div class="row">
