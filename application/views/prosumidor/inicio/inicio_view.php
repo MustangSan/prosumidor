@@ -1,6 +1,5 @@
 <?php 
 	$this->load->view('pages/header.php');
-
 	$base = $this->config->item('base_url');
 ?>
 
@@ -41,7 +40,7 @@
 							    <th>Nome</th>
 							    <th width="80">Preco</th>
 							    <th width="75">Disponivel</th>
-							    <th width="40">Detalhes</th>
+							    <th width="40"></th>
 							  </tr>
 							</thead>
 							<tbody>
@@ -60,7 +59,7 @@
 											else
 												echo  '<td><center>Não</center></td>';
 											//echo '<td>'.$a->getDisponibilidade().'</td>';
-											echo '<td><a href="'.$base.'prosumidor/produtos/verMais/'.$a->getIdProduto().'"><center><i class="icon-info-sign"></i></center></a></td>';						
+											echo '<td><a href="'.$base.'prosumidor/produtos/verMais/'.$a->getIdProduto().'" class="btn btn-default btn-xs"><i class="icon-info-sign"></i> Detalhes</a></td>';						
 											echo '</tr>';
 										}
 									}
@@ -69,8 +68,6 @@
 						</table>
 						</div>
                  	</div>
-                    <div class="col-md-6">
-                    </div>
                   </div>
                 </div>
               </div>

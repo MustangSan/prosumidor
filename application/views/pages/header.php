@@ -41,6 +41,7 @@
   <link rel='stylesheet' href='<?php echo $base; ?>assets/scss/chosen.css'>
   <link rel='stylesheet' href='<?php echo $base; ?>assets/scss/font-awesome/font-awesome.css'>
   <link rel='stylesheet' href='<?php echo $base; ?>assets/css/app.css'>
+  <link rel='stylesheet' href='<?php echo $base; ?>assets/css/datepicker.css'>
 
   <link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 

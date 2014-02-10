@@ -43,9 +43,7 @@
           							    <th>Nome</th>
           							    <th>Endereco</th>
           							    <th>Tamanho</th>
-          							    <th width="40">Editar</th>
-          							    <th width="40">Remover</th>
-
+          							    <th width="100"></th>http://localhost/prosumidor/prosumidor/propriedades/removerPropriedade/4
           							  </tr>
           							</thead>
           							<tbody>
@@ -56,8 +54,8 @@
           											echo '<td>'.$a->getNome().'</td>';
           											echo '<td>'.$a->getEndereco().'</td>';
           											echo '<td>'.$a->getTamanho().'</td>';
-          											echo '<td><a href="'.$base.'prosumidor/propriedades/editarPropriedade/'.$a->getIdPropriedade().'"><center><i class="icon-edit"></i></center></a></td>';
-          											echo '<td><a href="'.$base.'prosumidor/propriedades/removerPropriedade/'.$a->getIdPropriedade().'"><center><i class="icon-minus-sign"></i></center></td>';
+                                echo '<td><a href="'.$base.'prosumidor/propriedades/removerPropriedade/'.$a->getIdPropriedade().'" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>';
+          											echo ' <a href="'.$base.'prosumidor/propriedades/editarPropriedade/'.$a->getIdPropriedade().'" class="btn btn-default btn-xs"><i class="icon-pencil"></i> Editar</a></td>';
           											echo '</tr>';
           										}
           									}
