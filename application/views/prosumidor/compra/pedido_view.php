@@ -64,7 +64,7 @@
 							</div>
 						</div>
 
-						<div class="widget">
+						<div>
 							<div class="table-responsive">
 							<?php
 								if($prosumidor->getStatus() == 1 && $pedido->getValidacao() == 0){
