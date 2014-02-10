@@ -92,27 +92,23 @@ class Compra_model extends CI_Model {
 	/**
 	 * Remove uma compra no banco de dados
 	 */
-	public function deleteCompra($compra) {
+	public function deleteCompra($idCompra) {
 
-		// O parâmetro da função deve ser um objeto do tipo 'Compra'
-		if($compra instanceof Compra){
-			$this->db->trans_status();
+		$this->db->trans_status();
 
-			// Pesquisa se existe a compra no banco de dados
-			$this->db->where('idCompra', $compra->getIdCompra());
+		// Pesquisa se existe a compra no banco de dados
+		$this->db->where('idCompra', $idCompra);
 
-			// Deleta o compra do banco de dados
-			$this->db->delete('compra');
-			
-			// Finaliza a transação e fecha a conexão
-			$this->db->trans_complete();
-			$this->db->close();
-			
-			if($this->db->trans_status())
-				return TRUE;
-			return FALSE;
-
-		}
+		// Deleta o compra do banco de dados
+		$this->db->delete('compra');
+		
+		// Finaliza a transação e fecha a conexão
+		$this->db->trans_complete();
+		$this->db->close();
+		
+		if($this->db->trans_status())
+			return TRUE;
+		return FALSE;
 	}
 	
 	/** 
@@ -129,7 +125,7 @@ class Compra_model extends CI_Model {
 		// Inicia a transação
 		$this->db->trans_start();
 		
-		$this->db->order_by('nome ASC');
+		//$this->db->order_by('nome ASC');
 		$this->db->limit($limit, $start);
 		
 		// Realiza a pesquisa no banco de dados e joga os dados na query	
@@ -191,6 +187,52 @@ class Compra_model extends CI_Model {
 							$row->idPedido );
   	}
 	
+	/** 
+	*  Lista todos as compras retornando um array com todos os itens cadastrados no banco de dados.
+	*  Se a função for chamada sem parâmetros, considera que o usuário quer listar todos os itens.
+	*/
+	public function listarComprasPedido($idPedido, $limit = 0, $start = 0) {
+
+		// Caso não seja passado nenhum valor limite como parâmetro, inicia a variável com o número total de compras cadastradas no banco de dados
+		if ($limit == 0) {
+			$limit = $this->db->count_all("compra");
+		}
+		
+		// Inicia a transação
+		$this->db->trans_start();
+		
+		$this->db->where('idPedido', $idPedido);
+
+		//$this->db->order_by('nome ASC');
+		$this->db->limit($limit, $start);
+		
+		// Realiza a pesquisa no banco de dados e joga os dados na query	
+		$query = $this->db->get('compra');
+			
+		// Finaliza a transação e fecha a conexão
+		$this->db->trans_complete();
+		$this->db->close();
+		
+		$compras = array();
+		
+		// Verifica se encontrou alguma Compra na query
+		if ($query->num_rows() > 0  ) {
+
+			// Joga os resultados dentro da variável $compras
+			foreach ($query->result() as $row) {
+				$compras[] = new Compra(	$row->idCompra,
+											$row->qtdComprada,	
+											$row->valor,
+											$row->idProduto,
+											$row->idPedido );
+			}
+
+			// Retorna o array com todos as compras encontrados
+			return $compras;
+		}
+		return NULL;
+	}
+
 	/** 
 	*  Função que exporta os dados em formato .csv
 	*/

@@ -128,7 +128,7 @@ class Pedido_model extends CI_Model {
 		// Inicia a transação
 		$this->db->trans_start();
 		
-		$this->db->order_by('nome ASC');
+		//$this->db->order_by('nome ASC');
 		$this->db->limit($limit, $start);
 		
 		// Realiza a pesquisa no banco de dados e joga os dados na query	

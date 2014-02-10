@@ -41,9 +41,7 @@ class Comprar extends CI_Controller {
     	$this->load->view('prosumidor/compra/compra_menu_view');
     }
 
-    /** 
-	* Função que controla a inserção de um propriedade no banco de dados
-	*/
+
     public function criarPedido(){
 
     	$prosumidor = $this->Prosumidor->getProsumidor($this->session->userdata('idProsumidor'));
@@ -74,93 +72,164 @@ class Comprar extends CI_Controller {
 			
 	 		// Informa ao usuário que a inserção ocorreu com sucesso e retorna a tela principal da administração
 			//$this->session->set_flashdata('result', 'inserirSucesso');
-			redirect('prosumidor/compra', 'refresh');
+			redirect('prosumidor/comprar/pedidos/', 'refresh');
         }  
     }
 
-    /** 
-	* Função que controla a edição de um propriedade no banco de dados. A função recebe
-	* como parâmetro um código do propriedade que será editado
-	*/
-    public function editarPropriedade($idPropriedade){
+    public function pedidos(){
+
+ 		$data['pedidos'] = $this->Pedido_model->listarPedidos();
+
+ 		$this->load->view('prosumidor/compra/pedidos_list_view', $data);
+ 		
+        
+    }
+
+    public function pedido($idPedido){
+    	
+    	$data['prosumidor'] = $this->Prosumidor->getProsumidor($this->session->userdata('idProsumidor'));
+    	$data['pedido'] = $this->Pedido_model->getPedido($idPedido);
+    	$data['compras'] = $this->Compra_model->listarComprasPedido($idPedido);
+    	$data['produtos'] = $this->Produto_model->listarProdutos();
+
+    	$this->load->view('prosumidor/compra/pedido_view', $data);
+    }
+
+    public function confirmarPedido($idPedido){
+
+    	$prosumidor = $this->Prosumidor->getProsumidor($this->session->userdata('idProsumidor'));
+ 		if($prosumidor->getStatus() == 2){
+ 			redirect('prosumidor/inicio', 'refresh');
+ 		}
+    	$compras = $this->Compra_model->listarComprasPedido($idPedido);
+        if(isset($compras)){
+    	   $pedido = $this->Pedido_model->getPedido($idPedido);
+    	   $pedido->setValidacao(1);
+    	   $this->Pedido_model->editarPedido($pedido);
+           redirect('prosumidor/comprar/pedidos', 'refresh');
+        }
+        else
+            redirect('prosumidor/comprar/pedido/'.$idPedido, 'refresh');   
+
+    }
+
+    public function fazerComprar($idPedido){
 
     	$prosumidor = $this->Prosumidor->getProsumidor($this->session->userdata('idProsumidor'));
  		if($prosumidor->getStatus() == 2){
  			redirect('prosumidor/inicio', 'refresh');
  		}
  		
-        $this->load->library('form_validation');
-		
-		// Busca por meio de uma função da model o propriedade desejado e guarda na variável $propriedade
-        $propriedade = $this->Propriedade_model->getPropriedade($idPropriedade);
+ 		$produtos = $this->Produto_model->listarProdutos();
+ 		$data['produtos'] = $produtos;
+ 		$data['idPedido'] = $idPedido;
 
-	 	// Controla a inserção de dados nos campos de acordo com as regras estabelecidas para cada campo
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('endereco', 'Endereco', 'trim|required');
-        $this->form_validation->set_rules('tamanho', 'Tamanho', 'trim|required');
-
-	 	// Se a inserção de dados não for bem sucedida, carrega novamente a view de edição de compra
-        if ($this->form_validation->run() == FALSE)
+ 		$this->load->library('form_validation');
+ 		$this->form_validation->set_rules('qtd', 'Quantidade', 'trim|required');
+ 		
+ 		if ($this->form_validation->run() == FALSE)
         {
-			$data = array(
-				'nome' 				=> $propriedade->getNome(),
-				'endereco' 			=> $propriedade->getEndereco(),
-				'tamanho' 			=> $propriedade->getTamanho()
-			);
-	 		
-	 		// Se a inserção dos novos valores não for bem sucedida, atribui os valores da variável $propriedade
-	 		// à variável $dados. Caso a variável $dados esteja vazia, ele a elimina
-            $dados['propriedade'] = $propriedade;
-            if($dados['propriedade'] == NULL) {
-                unset($dados['propriedade']);
+        	$data['qtd'] = $this->input->post('qtd');
+            
+            $this->load->view('prosumidor/compra/compra_edit_view', $data);
+        }
+        else{
+        	$produto = $this->Produto_model->getProduto($this->input->post('produto'));
+        	$pedido = $this->Pedido_model->getPedido($idPedido);
+        	$valor = $this->input->post('qtd')*$produto->getPreco();
+        	$valorTotal = $pedido->getValorTotal()+$valor;
+        	$pedido->setValorTotal($valorTotal);
+
+        	$data = new Compra(NULL, $this->input->post('qtd'), $valor, $this->input->post('produto'), $idPedido);
+			$result = $this->Compra_model->inserirCompra($data);
+			if($result){
+				$this->Pedido_model->editarPedido($pedido);
+	 			// Informa ao usuário que a inserção ocorreu com sucesso e retorna a tela principal da administração
+				//$this->session->set_flashdata('result', 'inserirSucesso');
+				redirect('prosumidor/comprar/pedido/'.$idPedido, 'refresh');
 			}
-
-
-            $this->load->view('prosumidor/compra/propriedades_edit_view', $data);
-        }	
-
-        else {
-			
-	 		// Cria um novo propriedade com as informações editadas e grava na variável $data
-			$data = new Propriedade($propriedade->getIdPropriedade(), $this->input->post('nome'), $this->input->post('endereco'), 
-									$this->input->post('tamanho'), $this->session->userdata('idProsumidor'));
-             
-	 		// Chama a model de edição de propriedade passando como parâmetro os dados editados
-			$result = $this->Propriedade_model->editarPropriedade($data);
-			
-            if($result === FALSE)
-                echo "fail";
-            else
-            {	
-	 			// Se toda a operação ocorrer corretamente, o sistema exibe uma mensagem de sucesso e retorna a página principal da administração			
-				//$this->session->set_flashdata('result', 'editarSucesso');
-				redirect('prosumidor/compra', 'refresh');
-            }
         }
     }
 
-    /** 
-	* Função que controla a remoção de um propriedade do banco de dados. A função recebe
-	* como parâmetro o código do propriedade que será removido
-	*/
-    public function removerPropriedade($idPropriedade){
+    public function editarCompra($idCompra){
+
+        $prosumidor = $this->Prosumidor->getProsumidor($this->session->userdata('idProsumidor'));
+        if($prosumidor->getStatus() == 2){
+            redirect('prosumidor/inicio', 'refresh');
+        }
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('qtd', 'Quantidade', 'trim|required');        
+        $compra = $this->Compra_model->getCompra($idCompra);
+        $data['idPedido'] = $compra->getIdPedido();
+        
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['qtd'] = $compra->getQtdComprada();
+            
+            $this->load->view('prosumidor/compra/compra_edit_view', $data);
+        }
+        else{
+            
+            
+            $pedido = $this->Pedido_model->getPedido($compra->getIdPedido());
+            $produto = $this->Produto_model->getProduto($compra->getIdProduto());
+            
+            $valor = $this->input->post('qtd')*$produto->getPreco();
+            $valorTotal = $pedido->getValorTotal()-$compra->getValor();
+            $valorTotal = $valorTotal+$valor;
+            $compra->setValor($valor);
+            $compra->setQtdComprada($this->input->post('qtd'));
+            $pedido->setValorTotal($valorTotal);
+
+            $result = $this->Compra_model->editarCompra($compra);
+            if($result === FALSE)
+                echo "fail";
+            else
+            {   
+                $this->Pedido_model->editarPedido($pedido);
+                // Se toda a operação ocorrer corretamente, o sistema exibe uma mensagem de sucesso e retorna a página principal da administração       
+                //$this->session->set_flashdata('result', 'removerSucesso');
+                redirect('prosumidor/comprar/pedido/'.$compra->getIdPedido(), 'refresh');
+            }
+        }
+
+    }
+
+    public function removerCompra($idCompra){
 
     	$prosumidor = $this->Prosumidor->getProsumidor($this->session->userdata('idProsumidor'));
  		if($prosumidor->getStatus() == 2){
  			redirect('prosumidor/inicio', 'refresh');
  		}
- 		
-		$result = $this->Propriedade_model->deletePropriedade($idPropriedade);
+ 		$compra = $this->Compra_model->getCompra($idCompra);
+        $pedido = $this->Pedido_model->getPedido($compra->getIdPedido());
+        $valorTotal = $pedido->getValorTotal()-$compra->getValor();
+        $pedido->setValorTotal($valorTotal);
+
+		$result = $this->Compra_model->deleteCompra($idCompra);
 
 		if($result === FALSE)
 			echo "fail";
 		else
-		{		
+		{	
+            $this->Pedido_model->editarPedido($pedido);
 	 		// Se toda a operação ocorrer corretamente, o sistema exibe uma mensagem de sucesso e retorna a página principal da administração		
 			//$this->session->set_flashdata('result', 'removerSucesso');
-			redirect('prosumidor/compra', 'refresh');
+			redirect('prosumidor/comprar/pedido/'.$compra->getIdPedido(), 'refresh');
 		}
 	}
+
+    public function removerPedido($idPedido){
+        $compras = $this->Compra_model->listarComprasPedido($idPedido);
+        if(isset($compras)){
+            foreach ($compras as $key) {
+                $this->Compra_model->deleteCompra($key->getIdCompra());
+            }
+        }
+        $this->Pedido_model->deletePedido($idPedido);
+        redirect('prosumidor/comprar/pedidos/', 'refresh');
+    }
 
 	public function exportar() {
 		

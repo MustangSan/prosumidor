@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2014 at 02:20 PM
+-- Generation Time: Feb 10, 2014 at 01:46 AM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -124,13 +124,23 @@ INSERT INTO `classproduto` (`idProduto`, `idClassificacao`) VALUES
 
 CREATE TABLE IF NOT EXISTS `compra` (
   `idCompra` int(11) NOT NULL AUTO_INCREMENT,
-  `qntComprada` int(11) NOT NULL,
+  `qtdComprada` int(11) NOT NULL,
   `valor` float NOT NULL,
   `idProduto` int(11) NOT NULL,
   `idPedido` int(11) NOT NULL,
   PRIMARY KEY (`idCompra`),
   KEY `idPedido_idx` (`idPedido`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `compra`
+--
+
+INSERT INTO `compra` (`idCompra`, `qtdComprada`, `valor`, `idProduto`, `idPedido`) VALUES
+(1, 2, 4000, 7, 1),
+(2, 7, 161, 9, 1),
+(3, 20, 15, 10, 2),
+(4, 2, 22, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -146,7 +156,15 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `idProsumidor` int(10) NOT NULL,
   PRIMARY KEY (`idPedido`),
   KEY `idProsumidor_idx` (`idProsumidor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `pedido`
+--
+
+INSERT INTO `pedido` (`idPedido`, `valorTotal`, `validacao`, `data`, `idProsumidor`) VALUES
+(1, 4161, 1, '08/02/2014', 2),
+(2, 37, 1, '09/02/2014', 2);
 
 -- --------------------------------------------------------
 
