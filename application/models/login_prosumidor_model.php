@@ -20,7 +20,7 @@ class Login_prosumidor_model extends CI_Model {
     	$this->db->trans_start();
 		
         // Verifica se já existe os dados cadastrados no banco realizando uma consulta e gravando os dados na query
-		$query = $this->db->query('SELECT * FROM prosumidor WHERE email = "'.$this->input->post('email').'" AND senha = "'.md5($this->input->post('senha')).'" AND (status = 1)');
+		$query = $this->db->query('SELECT * FROM prosumidor WHERE email = "'.$this->input->post('email').'" AND senha = "'.md5($this->input->post('senha')).'"');
 		
 	    // Finaliza a transação e fecha a conexão
 		$this->db->trans_complete();

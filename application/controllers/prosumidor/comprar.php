@@ -104,7 +104,13 @@ class Comprar extends CI_Controller {
     	$compras = $this->Compra_model->listarComprasPedido($idPedido);
         if(isset($compras)){
     	   $pedido = $this->Pedido_model->getPedido($idPedido);
-    	   $pedido->setValidacao(1);
+           
+           $saldo = $prosumidor->getSaldoConsumidor()+$pedido->getValorTotal();
+           $prosumidor->setSaldoConsumidor($saldo);
+           $this->Prosumidor->editarProsumidor($prosumidor);
+    	   
+
+           $pedido->setValidacao(1);
     	   $this->Pedido_model->editarPedido($pedido);
            redirect('prosumidor/comprar/pedidos', 'refresh');
         }

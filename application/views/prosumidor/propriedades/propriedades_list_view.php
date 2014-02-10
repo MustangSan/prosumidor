@@ -43,7 +43,7 @@
           							    <th>Nome</th>
           							    <th>Endereco</th>
           							    <th>Tamanho</th>
-          							    <th width="100"></th>http://localhost/prosumidor/prosumidor/propriedades/removerPropriedade/4
+          							    <th width="100"></th>
           							  </tr>
           							</thead>
           							<tbody>

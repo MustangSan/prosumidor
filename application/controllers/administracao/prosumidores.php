@@ -111,10 +111,15 @@ class Prosumidores extends CI_Controller {
     public function concluirPedido($idPedido){
         $pedido = $this->Pedido_model->getPedido($idPedido);
         $pedido->setValidacao(2);
-        $result = $this->Pedido_model->editarPedido($pedido);
+        
+        $prosumidor = $this->Prosumidor_model->getProsumidor($pedido->getIdProsumidor());
+        $saldo = $prosumidor->getSaldoConsumidor()-$pedido->getValorTotal();
+        $prosumidor->setSaldoConsumidor($saldo);
+        $this->Prosumidor_model->editarProsumidor($prosumidor);
 
+        $result = $this->Pedido_model->editarPedido($pedido);
         if($result){
-            redirect('administracao/prosumidores/pedidos/'.$idPedido);
+            redirect('administracao/prosumidores/pedidos/'.$pedido->getIdProsumidor());
         }
 
     }
