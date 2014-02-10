@@ -162,8 +162,6 @@
 								echo '<a onclick="habilitarSenha()"><div class="btn" style="margin-left: 10px;">Alterar senha</div></a>';
 						?>
                  	</div>
-                    <div class="col-md-6">
-                    </div>
                   </div>
                 </div>
               </div>

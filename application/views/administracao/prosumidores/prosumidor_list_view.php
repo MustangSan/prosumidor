@@ -41,8 +41,7 @@
 							  	<th>E-mail</th>		    
 							    <th>Tipo</th>
 							    <th>Status</th>
-							    <th>Informações</th>
-							    <th>Bloqueio</th>
+							    <th width="100"></th>
 							  </tr>
 							</thead>
 							<tbody>
@@ -68,14 +67,14 @@
 													echo '<td>Bloqueado</td>';
 
 											//Mostrar dados do prosumidor
-											echo '<td><a href="'.$base.'administracao/prosumidores/listarDados/'.$a->getIdProsumidor().'"><center><i class="icon-info-sign"></i></center></a></td>';
+											echo '<td><a href="'.$base.'administracao/prosumidores/listarDados/'.$a->getIdProsumidor().'"><center><i class="icon-info-sign"></i></center></a>';
 
 											//Bloquear ou desbloquear dependendo do status
 											if($a->getStatus() == 1 )
-												echo '<td><a title="Bloquear" href="'.$base.'administracao/prosumidores/bloquear/'.$a->getIdProsumidor().'"><center><i class="icon-unlock"></i></center></a></td>';
+												echo '<a title="Bloquear" href="'.$base.'administracao/prosumidores/bloquear/'.$a->getIdProsumidor().'"><center><i class="icon-unlock"></i></center></a></td>';
 											else 
 												if($a->getStatus() == 2 )
-													echo '<td><a title="Desbloquear" href="'.$base.'administracao/prosumidores/desbloquear/'.$a->getIdProsumidor().'"><center><i class="icon-lock"></i></center></a></td>';
+													echo '<a title="Desbloquear" href="'.$base.'administracao/prosumidores/desbloquear/'.$a->getIdProsumidor().'"><center><i class="icon-lock"></i></center></a></td>';
 											echo '</tr>';
 										}
 									}

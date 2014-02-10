@@ -42,9 +42,7 @@
           							  <tr>
           							    <th>Nome</th>
           							    <th>E-mail</th>
-          							    <th width="40">Editar</th>
-          							    <th width="40">Remover</th>
-
+          							    <th width="100"></th>
           							  </tr>
           							</thead>
           							<tbody>
@@ -54,8 +52,8 @@
           											echo '<tr>';
           											echo '<td>'.$a->getNome().'</td>';
           											echo '<td>'.$a->getEmail().'</td>';
-          											echo '<td><a href="'.$base.'administracao/administradores/editarAdministrador/'.$a->getIdAdministrador().'"><center><i class="icon-edit"></i></center></a></td>';
-          											echo '<td><a href="'.$base.'administracao/administradores/removerAdministrador/'.$a->getIdAdministrador().'"><center><i class="icon-minus-sign"></i></center></a></td>';
+                                echo '<td><a href="'.$base.'administracao/administradores/removerAdministrador/'.$a->getIdAdministrador().'" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>';
+          											echo ' <a href="'.$base.'administracao/administradores/editarAdministrador/'.$a->getIdAdministrador().'" class="btn btn-default btn-xs"><i class="icon-pencil"></i> Editar</a></td>';
           											echo '</tr>';
           										}
           									}
