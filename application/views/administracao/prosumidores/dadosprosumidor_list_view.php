@@ -35,25 +35,37 @@
                     	<div>
                     	<h3 class="form-title form-title-first"><i class="icon-map-marker"></i> Dados Usuario</h3>
                     	<?php
-                      echo $prosumidor->getNome();
-                      echo $prosumidor->getEmail();
-                      echo $prosumidor->getCPF();
-                      echo $prosumidor->getEndereco();
-                      echo $prosumidor->getTelefone();
-                      echo $prosumidor->getSexo();
+                      echo 'Nome: '.$prosumidor->getNome();
+                      echo '<br />';
+                      echo 'E-mail: '.$prosumidor->getEmail();
+                      echo '<br />';
+                      echo 'CPF: '.$prosumidor->getCPF();
+                      echo '<br />';
+                      echo 'Endereço: '.$prosumidor->getEndereco();
+                      echo '<br />';
+                      echo 'Telefone: '.$prosumidor->getTelefone();
+                      echo '<br />';
+                      echo 'Sexo: '.$prosumidor->getSexo();
+                      echo '<br />';
                       //Status
                       if($prosumidor->getStatus() == 1 )
-                        echo '<td>Normal</td>';
+                        echo 'Status: Normal';
                       else 
                         if($prosumidor->getStatus() == 2 )
-                          echo '<td>Bloqueado</td>';
+                          echo 'Status: Bloqueado';
+                      echo '<br />';
                       if($prosumidor->getTipo() == 1 )
-                        echo '<td>Consumidor</td>';
+                        echo 'Tipo: Consumidor';
                       else 
                         if($prosumidor->getTipo() == 2 )
-                          echo '<td>Prosumidor</td>'; 
-                      echo $prosumidor->getSaldoConsumidor();
+                          echo 'Tipo: Prosumidor'; 
+                      echo '<br />';
+                      echo 'Saldo: '.$prosumidor->getSaldoConsumidor();
+                      echo '<br />';
+                      echo '<br />';
                       ?>
+                      <a href="<?php echo $base; ?>administracao/prosumidores/pedidos/<?php echo $prosumidor->getIdProsumidor(); ?>" class="btn btn-primary">Ver Pedidos</a>
+                      <br />
                     	</div>
                     	<h3 class="form-title form-title-first"><i class="icon-map-marker"></i> Propriedades Cadastradas</h3>
                     	<div class="table-responsive">

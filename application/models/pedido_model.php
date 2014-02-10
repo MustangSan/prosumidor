@@ -118,7 +118,7 @@ class Pedido_model extends CI_Model {
 	*  Lista todos as pedidos retornando um array com todos os itens cadastrados no banco de dados.
 	*  Se a função for chamada sem parâmetros, considera que o usuário quer listar todos os itens.
 	*/
-	public function listarPedidos($limit = 0, $start = 0) {
+	public function listarPedidos($idProsumidor = 0, $limit = 0, $start = 0) {
 
 		// Caso não seja passado nenhum valor limite como parâmetro, inicia a variável com o número total de pedidos cadastradas no banco de dados
 		if ($limit == 0) {
@@ -128,6 +128,7 @@ class Pedido_model extends CI_Model {
 		// Inicia a transação
 		$this->db->trans_start();
 		
+		$this->db->where('idProsumidor',$idProsumidor);
 		//$this->db->order_by('nome ASC');
 		$this->db->limit($limit, $start);
 		

@@ -78,7 +78,7 @@ class Comprar extends CI_Controller {
 
     public function pedidos(){
 
- 		$data['pedidos'] = $this->Pedido_model->listarPedidos();
+ 		$data['pedidos'] = $this->Pedido_model->listarPedidos($this->session->userdata('idProsumidor'));
 
  		$this->load->view('prosumidor/compra/pedidos_list_view', $data);
  		

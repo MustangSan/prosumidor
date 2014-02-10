@@ -22,6 +22,9 @@ class Prosumidores extends CI_Controller {
         parent::__construct();
         $this->load->model('Prosumidor_model');
         $this->load->model('Propriedade_model');
+        $this->load->model('Pedido_model');
+        $this->load->model('Compra_model');
+        $this->load->model('Produto_model');
         $this->load->model('Login_administracao_model', 'Login');
         $this->load->library('Dominio');
 		
@@ -86,6 +89,34 @@ class Prosumidores extends CI_Controller {
 			//$this->session->set_flashdata('result', 'editarSucesso');
 			redirect('administracao/prosumidores', 'refresh');
         }
+    }
+
+    public function pedidos($idProsumidor){
+        $data['pedidos'] = $this->Pedido_model->listarPedidos($idProsumidor);
+        $data['idProsumidor'] = $idProsumidor;
+        $this->load->view('administracao/prosumidores/pedidos_list_view', $data);
+    }
+
+    public function pedido($idPedido){
+        //$data['prosumidor'] = $this->Prosumidor->getProsumidor();
+        $pedido = $this->Pedido_model->getPedido($idPedido);
+        $data['pedido'] = $pedido;
+        $data['compras'] = $this->Compra_model->listarComprasPedido($idPedido);
+        $data['produtos'] = $this->Produto_model->listarProdutos();
+        $data['idProsumidor'] = $pedido->getIdProsumidor();
+
+        $this->load->view('administracao/prosumidores/pedido_view', $data);
+    }
+
+    public function concluirPedido($idPedido){
+        $pedido = $this->Pedido_model->getPedido($idPedido);
+        $pedido->setValidacao(2);
+        $result = $this->Pedido_model->editarPedido($pedido);
+
+        if($result){
+            redirect('administracao/prosumidores/pedidos/'.$idPedido);
+        }
+
     }
 }
 
