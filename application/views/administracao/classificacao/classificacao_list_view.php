@@ -1,7 +1,7 @@
 <?php 
-	$this->load->view('pages/header.php');
+  $this->load->view('pages/header.php');
 
-	$base = $this->config->item('base_url');
+  $base = $this->config->item('base_url');
 ?>
 
 <div class="all-wrapper">
@@ -16,7 +16,7 @@
         </button>
       </div>
 
-	  <?php $this->load->view('pages/menu-administrador.php'); ?>
+    <?php $this->load->view('pages/menu-administrador.php'); ?>
     </div>
 
     <div class="col-md-9">
@@ -32,38 +32,35 @@
                 <div class="widget">
                   <div class="widget-content-white glossed">
                     <div class="padded">
-                    	<div class="widget-controls pull-right">
-			              <a href="<?php echo $base; ?>administracao/classificacoes/inserirClassificacao/"><i class="icon-plus-sign"></i></a>
-			            </div>
-                    	<h3 class="form-title form-title-first"><i class="icon-sort-by-attributes"></i> Classificações Cadastradas</h3>
-                    	<div class="table-responsive">
-          				<table class="table table-striped table-bordered table-hover">
-							<thead>
-							  <tr>
-							    <th>Nome</th>
-							    <th>Descricao</th>
-							    <th width="40">Editar</th>
-							    <th width="40">Remover</th>
-							  </tr>
-							</thead>
-							<tbody>
-								<?php 
-									if(isset($classificacoes)){
-										foreach($classificacoes as $a){	
-											echo '<tr>';
-											echo '<td>'.$a->getNome().'</td>';
-											echo '<td>'.$a->getDescricao().'</td>';
-											echo '<td><a href="'.$base.'administracao/classificacoes/editarClassificacao/'.$a->getIdClassificacao().'"><center><i class="icon-edit"></i></center></a></td>';
-											echo '<td><a href="'.$base.'administracao/classificacoes/removerClassificacao/'.$a->getIdClassificacao().'"><center><i class="icon-minus-sign"></i></center></a></td>';
-											echo '</tr>';
-										}
-									}
-								?>
-							</tbody>
-          				</table>
-          			    </div>
-                    </div>
-                    <div class="col-md-6">
+                      <div class="widget-controls pull-right">
+                       <a href="<?php echo $base; ?>administracao/classificacoes/inserirClassificacao/"><i class="icon-plus-sign"></i></a>
+                      </div>
+                      <h3 class="form-title form-title-first"><i class="icon-sort-by-attributes"></i> Classificações Cadastradas</h3>
+                      <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-hover">
+          							<thead>
+          							  <tr>
+          							    <th>Nome</th>
+          							    <th>Descricao</th>
+          							    <th width="100"></th>
+          							  </tr>
+          							</thead>
+          							<tbody>
+          								<?php 
+          									if(isset($classificacoes)){
+          										foreach($classificacoes as $a){	
+          											echo '<tr>';
+          											echo '<td>'.$a->getNome().'</td>';
+          											echo '<td>'.$a->getDescricao().'</td>';
+                                echo '<td class="text-right"><a href="'.$base.'administracao/classificacoes/removerClassificacao/'.$a->getIdClassificacao().'" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>';
+                                echo ' <a href="'.$base.'administracao/classificacoes/editarClassificacao/'.$a->getIdClassificacao().'" class="btn btn-default btn-xs"><i class="icon-pencil"></i> Editar</a></td>';
+          											echo '</tr>';
+          										}
+          									}
+          								?>
+          							</tbody>
+          				    </table>
+          			      </div>
                     </div>
                   </div>
                 </div>

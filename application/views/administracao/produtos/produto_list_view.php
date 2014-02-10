@@ -45,9 +45,7 @@
 									    <th>Preco</th>
 									    <th width="50">Disponibilidade</th>
 									    <th>IdCat</th>
-									    <th width="40">Editar</th>
-									    <th width="40">Remover</th>
-									    <th width="40">Classificacao</th>
+									    <th width="245"></th>
 									  </tr>
 									</thead>
 									<tbody>
@@ -69,10 +67,9 @@
 														}
 													}
 													//echo '<td>'.$a->getIdCategoria().'</td>';
-													
-													echo '<td><a href="'.$base.'administracao/produtos/editarProduto/'.$a->getIdProduto().'"><center><i class="icon-edit"></i></center></a></td>';
-													echo '<td><a href="'.$base.'administracao/produtos/removerProduto/'.$a->getIdProduto().'"><center><i class="icon-remove"></i></center></a></td>';
-													echo '<td><a href="'.$base.'administracao/produtos/adicionarClassificacao/'.$a->getIdProduto().'"><center><button class="btn btn-primary btn-xs">Adicionar</button></center></a></td>';
+													echo '<td><a href="'.$base.'administracao/produtos/removerProduto/'.$a->getIdProduto().'" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>';
+													echo ' <a href="'.$base.'administracao/produtos/editarProduto/'.$a->getIdProduto().'" class="btn btn-default btn-xs"><i class="icon-pencil"></i> Editar</a>';
+													echo ' <a href="'.$base.'administracao/produtos/adicionarClassificacao/'.$a->getIdProduto().'" class="btn btn-primary btn-xs">Adicionar Classificação</a></td>';
 													echo '</tr>';
 												}
 											}

@@ -1,6 +1,5 @@
 <?php 
 	$this->load->view('pages/header.php');
-
 	$base = $this->config->item('base_url');
 ?>
 
@@ -61,8 +60,6 @@
           							</tbody>
           					  </table>
           			      </div>
-                    </div>
-                    <div class="col-md-6">
                     </div>
                   </div>
                 </div>

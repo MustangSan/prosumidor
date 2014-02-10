@@ -37,34 +37,30 @@
 			                </div>
                     	<h3 class="form-title form-title-first"><i class="icon-list-ul"></i> Categorias Cadastradas</h3>
                     	<div class="table-responsive">
-          				<table class="table table-striped table-bordered table-hover">
-							<thead>
-							  <tr>
-							    <th>Nome</th>
-							    <th>Descricao</th>
-							    <th width="40">Editar</th>
-							    <th width="40">Remover</th>
-
-							  </tr>
-							</thead>
-							<tbody>
-								<?php 
-									if(isset($categorias)){
-										foreach($categorias as $a){	
-											echo '<tr>';
-											echo '<td>'.$a->getNome().'</td>';
-											echo '<td>'.$a->getDescricao().'</td>';
-											echo '<td><a href="'.$base.'administracao/categorias/editarCategoria/'.$a->getIdCategoria().'"><center><i class="icon-edit"></i></center></a></td>';
-											echo '<td><a href="'.$base.'administracao/categorias/removerCategoria/'.$a->getIdCategoria().'"><center><i class="icon-minus-sign"></i></center></a></td>';
-											echo '</tr>';
-										}
-									}
-								?>
-							</tbody>
-          				</table>
-          			    </div>
-                    </div>
-                    <div class="col-md-6">
+              				<table class="table table-striped table-bordered table-hover">
+          							<thead>
+          							  <tr>
+          							    <th>Nome</th>
+          							    <th>Descricao</th>
+          							    <th width="100"></th>
+          							  </tr>
+          							</thead>
+          							<tbody>
+          								<?php 
+          									if(isset($categorias)){
+          										foreach($categorias as $a){	
+          											echo '<tr>';
+          											echo '<td>'.$a->getNome().'</td>';
+          											echo '<td>'.$a->getDescricao().'</td>';
+                                echo '<td class="text-right"><a href="'.$base.'administracao/categorias/removerCategoria/'.$a->getIdCategoria().'" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>';
+          											echo ' <a href="'.$base.'administracao/categorias/editarCategoria/'.$a->getIdCategoria().'" class="btn btn-default btn-xs"><i class="icon-pencil"></i> Editar</a></td>';
+          											echo '</tr>';
+          										}
+          									}
+          								?>
+          							</tbody>
+              				</table>
+          			      </div>
                     </div>
                   </div>
                 </div>

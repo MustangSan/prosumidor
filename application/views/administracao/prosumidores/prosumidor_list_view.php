@@ -1,6 +1,5 @@
 <?php 
 	$this->load->view('pages/header.php');
-
 	$base = $this->config->item('base_url');
 ?>
 
@@ -41,7 +40,7 @@
 							  	<th>E-mail</th>		    
 							    <th>Tipo</th>
 							    <th>Status</th>
-							    <th width="100"></th>
+							    <th width="140"></th>
 							  </tr>
 							</thead>
 							<tbody>
@@ -61,20 +60,20 @@
 											
 											//Status
 											if($a->getStatus() == 1 )
-												echo '<td>Normal</td>';
+												echo '<td><span class="label label-primary">Normal</span></td>';
 											else 
 												if($a->getStatus() == 2 )
-													echo '<td>Bloqueado</td>';
-
-											//Mostrar dados do prosumidor
-											echo '<td><a href="'.$base.'administracao/prosumidores/listarDados/'.$a->getIdProsumidor().'"><center><i class="icon-info-sign"></i></center></a>';
+													echo '<td><span class="label label-danger">Bloqueado</span></td>';
 
 											//Bloquear ou desbloquear dependendo do status
 											if($a->getStatus() == 1 )
-												echo '<a title="Bloquear" href="'.$base.'administracao/prosumidores/bloquear/'.$a->getIdProsumidor().'"><center><i class="icon-unlock"></i></center></a></td>';
+												echo '<td class="text-right"><a title="Bloquear" href="'.$base.'administracao/prosumidores/bloquear/'.$a->getIdProsumidor().'" class="btn btn-danger btn-xs"><i class="icon-lock"></i></a>';
 											else 
 												if($a->getStatus() == 2 )
-													echo '<a title="Desbloquear" href="'.$base.'administracao/prosumidores/desbloquear/'.$a->getIdProsumidor().'"><center><i class="icon-lock"></i></center></a></td>';
+													echo '<td class="text-right"><a title="Desbloquear" href="'.$base.'administracao/prosumidores/desbloquear/'.$a->getIdProsumidor().'" class="btn btn-default btn-xs"><i class="icon-unlock"></i></a>';
+
+											//Mostrar dados do prosumidor
+											echo ' <a href="'.$base.'administracao/prosumidores/listarDados/'.$a->getIdProsumidor().'" class="btn btn-default btn-xs"><i class="icon-info-sign"></i> Informações</a>';
 											echo '</tr>';
 										}
 									}
@@ -82,8 +81,6 @@
           				</tbody>
           			  </table>
           			  </div>
-                    </div>
-                    <div class="col-md-6">
                     </div>
                   </div>
                 </div>
