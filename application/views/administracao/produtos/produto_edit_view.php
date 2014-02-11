@@ -84,7 +84,15 @@
 							echo form_error('unidade', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
 							echo '</div></div>';
 
-							$data = array(
+							$options = array(
+									  '1'		=> 'Disponivel',
+									  '2' 		=> 'Não Disponivel'
+									);
+							$js = 'id="disponibilidade" class="form-control"';
+							echo '<div class="col-md-6"><div class="form-group"><label>Tipo</label>'.form_dropdown('disponibilidade', $options, $disponibilidade, $js);
+							echo '</div></div>';
+
+							/*$data = array(
 				              'name'        => 'disponibilidade',
 				              'id'          => 'prependedInput',
 							  'type'		=> 'text',
@@ -93,7 +101,7 @@
 				            );			
 							echo '<div class="col-md-6"><div class="form-group"><label>Disponibilidade</label>'.form_input($data);
 							echo form_error('disponibilidade', '<a href="#" class="fieldError" rel="tooltip" title="', '"><i class="icon-warning-sign"></i></a>');
-							echo '</div></div>';
+							echo '</div></div>';*/
 
 							echo '</div><div class="row">';
 							

@@ -44,7 +44,7 @@
 									    <th>Nome</th>
 									    <th>Preco</th>
 									    <th width="50">Disponibilidade</th>
-									    <th>IdCat</th>
+									    <th>Categoria</th>
 									    <th width="245"></th>
 									  </tr>
 									</thead>
@@ -59,7 +59,10 @@
 														echo '<td><center><img style="display: inline;" src="'.$base.'images/produtos/semfoto.png" width="50" height="50" /></center></td>';
 													echo '<td>'.$a->getNome().'</td>';
 													echo '<td>'.$a->getPreco().'</td>';
-													echo '<td>'.$a->getDisponibilidade().'</td>';
+													if($a->getDisponibilidade() == 1)
+														echo '<td><center>Sim</center></td>';
+													else
+														echo  '<td><center>Não</center></td>';
 													if(isset($categorias)){
 														foreach ($categorias as $key) {
 															if($key->getIdCategoria() == $a->getIdCategoria())
