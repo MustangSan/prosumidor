@@ -33,8 +33,8 @@
                     <div class="padded">
                     	<h3 class="form-title form-title-first"><i class="icon-group"></i> Usuários Cadastrados</h3>
                     	<div class="table-responsive">
-                    		<a href="<?php $base; ?> administracao/prosumidores/gerarRelatorioPedido/" class="btn btn-primary">Relatorio Pedidos </a>
-                    		<a href="<?php $base; ?> administracao/prosumidores/gerarRelatorioVenda/" class="btn btn-primary"> Relatorio Vendas</a>
+                    		<a href="<?php $base; ?> prosumidores/gerarRelatorioPedido/" class="btn btn-primary">Relatorio Pedidos </a>
+                    		<a href="<?php $base; ?> prosumidores/gerarRelatorioVenda/" class="btn btn-primary"> Relatorio Vendas</a>
                     		<br /><br />
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
