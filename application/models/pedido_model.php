@@ -39,12 +39,18 @@ class Pedido_model extends CI_Model {
 		if($pedido instanceof Pedido){
 			$this->db->trans_start();
 			
+			$dia = substr($pedido->getData(),0,2);
+			$mes = substr($pedido->getData(),3,2);
+			$ano = substr($pedido->getData(),6,4);
+			$data = $ano."/".$mes."/".$dia;
+
 			// Insere uma pedido
 			$dados = array ('idPedido'		=> $pedido->getIdPedido(),
 							'valorTotal' 	=> $pedido->getValorTotal(),
 							'validacao' 	=> $pedido->getValidacao(),
-							'data' 			=> $pedido->getData(),
-							'idProsumidor'	=> $pedido->getIdProsumidor()
+							'data' 			=> $data,
+							'idProsumidor'	=> $pedido->getIdProsumidor(),
+							'nomeVoluntario'=> $pedido->getNomeVoluntario()
 							);
 
 			$this->db->insert('pedido', $dados);
@@ -73,7 +79,8 @@ class Pedido_model extends CI_Model {
 							'valorTotal' 	=> $pedido->getValorTotal(),
 							'validacao' 	=> $pedido->getValidacao(),
 							'data' 			=> $pedido->getData(),
-							'idProsumidor'	=> $pedido->getIdProsumidor()
+							'idProsumidor'	=> $pedido->getIdProsumidor(),
+							'nomeVoluntario'=> $pedido->getNomeVoluntario()
 							);
 		
 			// Pesquisa se existe a pedido no banco de dados
@@ -127,8 +134,8 @@ class Pedido_model extends CI_Model {
 		
 		// Inicia a transação
 		$this->db->trans_start();
-		
-		$this->db->where('idProsumidor',$idProsumidor);
+		if($idProsumidor != 0)
+			$this->db->where('idProsumidor',$idProsumidor);
 		//$this->db->order_by('nome ASC');
 		$this->db->limit($limit, $start);
 		
@@ -150,7 +157,8 @@ class Pedido_model extends CI_Model {
 											$row->valorTotal,	
 											$row->validacao,
 											$row->data,
-											$row->idProsumidor
+											$row->idProsumidor,
+											$row->nomeVoluntario
 										);
 			}
 
@@ -189,18 +197,22 @@ class Pedido_model extends CI_Model {
 							$row->valorTotal,	
 							$row->validacao,
 							$row->data,
-							$row->idProsumidor
+							$row->idProsumidor,
+							$row->nomeVoluntario
 						);
   	}
 	
 	/** 
 	*  Função que exporta os dados em formato .csv
 	*/
-	public function exportar() {
+	public function exportar($dias) {
 		$this->load->dbutil();
-		
+
 		// Prepara os dados para exportação
-		$query = $this->db->get('pedido');
+		$query = $this->db->query(' SELECT PROSUMIDOR.email, PEDIDO.idPedido, PEDIDO.data, PEDIDO.valorTotal, PRODUTO.nome, COMPRA.qtdComprada, COMPRA.valor, PEDIDO.nomeVoluntario
+									FROM prosumidor.pedido AS PEDIDO, prosumidor.prosumidor AS PROSUMIDOR, prosumidor.compra AS COMPRA, prosumidor.produto AS PRODUTO
+									WHERE COMPRA.idPedido = PEDIDO.idPedido AND COMPRA.idProduto = PRODUTO.idProduto 
+									AND PEDIDO.idProsumidor = PROSUMIDOR.idProsumidor AND DATEDIFF(CURDATE(),data) >= 0 AND DATEDIFF(CURDATE(),data) <= '.$dias.' ORDER BY PEDIDO.idPedido;');
 		$delimiter = ";";
 		$newline = "\r\n";
 		

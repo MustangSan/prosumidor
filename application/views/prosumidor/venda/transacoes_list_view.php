@@ -15,14 +15,14 @@
         </button>
       </div>
 
-	  <?php $this->load->view('pages/menu-administrador.php'); ?>
+	  <?php $this->load->view('pages/menu-prossumidor.php'); ?>
     </div>
 
     <div class="col-md-9">
       <div class="content-wrapper wood-wrapper">
         <div class="content-inner">
           <div class="page-header page-header-dark-blue">
-            <h1><i class="icon-user"></i> Usuários</h1>
+            <h1><i class="icon-truck"></i> Vender</h1>
           </div>
 
           <div class="main-content">
@@ -31,25 +31,29 @@
                 <div class="widget">
                   <div class="widget-content-white glossed">
                     <div class="padded">
-                    	<h3 class="form-title form-title-first"><i class="icon-tags"></i> Pedidos do Usuário</h3>
+                    	<h3 class="form-title form-title-first"><i class="icon-shopping-cart"></i> Suas vendas</h3>
                     	<div class="table-responsive">
-          				<table class="table table-striped table-bordered table-hover">
+						<table class="table table-striped table-bordered table-hover">
 							<thead>
 							  <tr>
 							    <th>Data</th>
-							    <th>Valor Total</th>
+							    <th>Valor Recebido</th>
 							  	<th>Status</th>
-							  	<th>Voluntario</th>
-							  	<th width="177"></th>
+							  	<th width="147"></th>
 							  </tr>
 							</thead>
 							<tbody>
 								<?php 
-								if(isset($pedidos)){
-									foreach($pedidos as $a){	
+								if(isset($transacoes)){
+									foreach($transacoes as $a){	
 										echo '<tr>';
 										echo '<td>'.$a->getData().'</td>';
-										echo '<td>'.$a->getValorTotal().'</td>';
+										
+										if($a->getValorTotalRecebido() != 0)
+											echo '<td>'.$a->getValorTotalRecebido().'</td>';
+										else
+											echo '<td>A Receber</td>';
+										
 										if($a->getValidacao() == 0)
 											echo '<td><span class="label label-info">Aberto</span></td>';
 										else {
@@ -60,27 +64,22 @@
 													echo '<td><span class="label label-success">Concluído</span></td>';
 											}
 										}
-
-										if($a->getValidacao() == 2)
-											echo '<td>'.$a->getNomeVoluntario().'</td>';
-										else
-											echo '<td></td>';
-
-										if($a->getValidacao() == 1)
-											echo '<td class="text-right"><a href="'.$base.'administracao/prosumidores/concluirPedido/'.$a->getIdPedido().'" class="btn btn-success btn-xs"><i class="icon-ok-sign"></i> Concluir Pedido</a>';
-										else
-											echo '<td class="text-right">';
-										echo ' <a href="'.$base.'administracao/prosumidores/pedido/'.$a->getIdPedido().'" class="btn btn-default btn-xs"><i class="icon-info-sign"></i> Ver</a></td>';
-										echo '</tr>';
+										echo '<td class="text-right">';
+										if($a->getValidacao() == 0)
+											echo '<a href="'.$base.'prosumidor/vender/removerTransacao/'.$a->getIdTransacao().'" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>';
+										echo ' <a href="'.$base.'prosumidor/vender/transacao/'.$a->getIdTransacao().'" class="btn btn-default btn-xs"><i class="icon-info-sign"></i> Ver Vendas</a>';
+										echo '</td></tr>';
 									}
 								}
 							?>
 							</tbody>
-          				</table>
-          			    </div>
+						</table>
 						<?php
-							echo '<a href="'.$base.'administracao/prosumidores/listarDados/'.$idProsumidor.'" class="btn btn-danger">Voltar</a>';
+							echo '<a href="'.$base.'prosumidor/vender" class="btn btn-danger">Voltar</a>';
 						?>
+						</div>
+                 	</div>
+                    <div class="col-md-6">
                     </div>
                   </div>
                 </div>

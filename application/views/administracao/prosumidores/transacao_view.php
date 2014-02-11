@@ -31,7 +31,7 @@
                 <div class="widget">
                   <div class="widget-content-white glossed">
                     <div class="padded">
-                    	<h3 class="form-title form-title-first"><i class="icon-barcode"></i> Detalhes do Pedido</h3>
+                    	<h3 class="form-title form-title-first"><i class="icon-barcode"></i> Detalhes da Venda</h3>
                     	<div class="widget">
 	                    	<div class="table-responsive">
 	          				<table class="table table-striped table-bordered table-hover">
@@ -46,22 +46,25 @@
 								<tbody>
 								<?php
 									echo '<tr>';
-									echo '<td>'.$pedido->getData().'</td>';
-									echo '<td>'.$pedido->getValorTotal().'</td>';
-									if($pedido->getValidacao() == 0)
+									echo '<td>'.$transacao->getData().'</td>';
+									if($transacao->getValorTotalRecebido() != 0)
+										echo '<td>'.$transacao->getValorTotalRecebido().'</td>';
+									else
+										echo '<td>A Receber</td>';
+									if($transacao->getValidacao() == 0)
 										echo '<td><span class="label label-info">Aberto</span></td>';
 									else {
-										if($pedido->getValidacao() == 1)
+										if($transacao->getValidacao() == 1)
 											echo '<td><span class="label label-warning">Confirmado</span></td>';
 										else{ 
-											if($pedido->getValidacao() == 2)
+											if($transacao->getValidacao() == 2)
 												echo '<td><span class="label label-success">Concluído</span></td>';
 										}
 									}
-									if($pedido->getValidacao() == 2)
-										echo '<td>'.$pedido->getNomeVoluntario().'</td>';
+									if($transacao->getValidacao() == 2)
+										echo '<td>'.$transacao->getNomeVoluntario().'</td>';
 									else
-										echo '<td></td>';								
+										echo '<td></td>';
 									echo '</tr>';
 								?>
 								</tbody>
@@ -71,21 +74,23 @@
 
 						<div>
 							<div class="table-responsive">
-							<h3 class="form-title form-title-first"><i class="icon-tags"></i> Produtos do Pedido</h3>
+							<h3 class="form-title form-title-first"><i class="icon-tags"></i> Produtos da Venda</h3>
 							<table class="table table-striped table-bordered table-hover">
 								<thead>
 								  <tr>
 								    <th width="70">Foto</th>
 								    <th>Produto</th>
-								    <th>Quantidade</th>
-								    <th>Valor</th>
+								    <th>Quantidade Disponivel</th>
+								    <th>Quantidade Vendida</th>
+									<th>Valor Recebido</th>
 								  </tr>
 								</thead>
 								<tbody>
 								<?php
-									if(isset($compras)){
-										foreach($compras as $key){
+									if(isset($vendas)){
+										foreach($vendas as $key){
 											echo '<tr>';
+											if (isset($produtos)) {
 											foreach ($produtos as $a) {
 												if($a->getIdProduto() == $key->getIdProduto()){
 													if ($a->getFoto() != '0')
@@ -95,8 +100,18 @@
 													echo '<td>'.$a->getNome().'</td>';
 												}
 											}
-											echo '<td>'.$key->getQtdComprada().'</td>';
-											echo '<td>'.$key->getValor().'</td>';
+											}											
+											echo '<td>'.$key->getQtdDisponivel().'</td>';
+											if($key->getQtdVendida() != 0){
+												echo '<td>'.$key->getQtdVendida().'</td>';
+												echo '<td>'.$key->getValorRecebido().'</td>';
+											}
+											else{
+												echo '<td>A Confirmar</td>';
+												echo '<td></td>';
+											}
+											if($transacao->getValidacao() == 1)
+												echo '<td class="text-right"><a href="'.$base.'administracao/prosumidores/confirmarVenda/'.$key->getIdVenda().'" class="btn btn-success btn-xs"><i class="icon-ok-sign"></i> Confirmar Produto</a></td>';
 											echo'</tr>';
 										}
 									}
@@ -107,10 +122,10 @@
 						</div>
 						<br>
 						<?php
-						if($pedido->getValidacao() == 1)
-							echo '<a href="'.$base.'administracao/prosumidores/concluirPedido/'.$pedido->getIdPedido().'" class="btn btn-primary"><i class="icon-ok-sign"></i> Concluir Pedido</a>';
-							echo '  ';						
-							echo '<a href="'.$base.'administracao/prosumidores/pedidos/'.$idProsumidor.'" class="btn btn-danger">Voltar</a>';
+						if($transacao->getValidacao() == 1)
+							echo '<a href="'.$base.'administracao/prosumidores/concluirTransacao/'.$transacao->getIdTransacao().'" class="btn btn-primary"><i class="icon-ok-sign"></i> Concluir Venda</a>';
+							echo '  ';
+							echo '<a href="'.$base.'administracao/prosumidores/transacoes/'.$idProsumidor.'" class="btn btn-danger">Voltar</a>';
 						?>
 						</div>
 					</div>

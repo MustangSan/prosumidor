@@ -67,7 +67,7 @@ class Comprar extends CI_Controller {
 	 	// no banco de dados por meio da chamada de uma função da model
         else
         {
-			$data = new Pedido(NULL, 0, 0, $this->input->post('data'), $this->session->userdata('idProsumidor') );
+			$data = new Pedido(NULL, 0, 0, $this->input->post('data'), $this->session->userdata('idProsumidor'), 0 );
 			$result = $this->Pedido_model->inserirPedido($data);
 			
 	 		// Informa ao usuário que a inserção ocorreu com sucesso e retorna a tela principal da administração
@@ -101,6 +101,7 @@ class Comprar extends CI_Controller {
  		if($prosumidor->getStatus() == 2){
  			redirect('prosumidor/inicio', 'refresh');
  		}
+
     	$compras = $this->Compra_model->listarComprasPedido($idPedido);
         if(isset($compras)){
     	   $pedido = $this->Pedido_model->getPedido($idPedido);
@@ -208,6 +209,7 @@ class Comprar extends CI_Controller {
  		if($prosumidor->getStatus() == 2){
  			redirect('prosumidor/inicio', 'refresh');
  		}
+
  		$compra = $this->Compra_model->getCompra($idCompra);
         $pedido = $this->Pedido_model->getPedido($compra->getIdPedido());
         $valorTotal = $pedido->getValorTotal()-$compra->getValor();
@@ -227,6 +229,12 @@ class Comprar extends CI_Controller {
 	}
 
     public function removerPedido($idPedido){
+        
+        $prosumidor = $this->Prosumidor->getProsumidor($this->session->userdata('idProsumidor'));
+        if($prosumidor->getStatus() == 2){
+            redirect('prosumidor/inicio', 'refresh');
+        }
+        
         $compras = $this->Compra_model->listarComprasPedido($idPedido);
         if(isset($compras)){
             foreach ($compras as $key) {
@@ -247,10 +255,10 @@ class Comprar extends CI_Controller {
 		$this->load->helper('download');
 		
 		// Prepara os dados para exportação chamando uma função de auxílio presente na model de administração
-		$data = $this->Propriedade_model->exportar();
+		$data = $this->Pedido_model->exportar();
 
 		// Inicia o download dos dados exportados
-		force_download('Compra.csv', $data);
+		force_download('Pedido.csv', $data);
 	}
 }
 

@@ -2,17 +2,17 @@
 
 /*
  *---------------------------------------------------------------
- * CLASSE PEDIDO
+ * CLASSE TRANSACAO
  *---------------------------------------------------------------
  */
 
-class Pedido {
+class Transacao {
 	
 	/**
 	 * Atributos
 	 */
-	private $idPedido;
-	private $valorTotal;
+	private $idTransacao;
+	private $valorTotalRecebido;
 	private $validacao;
 	private $data;
 	private $idProsumidor;
@@ -21,9 +21,9 @@ class Pedido {
 	/**
 	 * Construtor
 	 */
-	public function __construct($idPedido, $valorTotal, $validacao, $data, $idProsumidor, $nomeVoluntario) {
-		$this->setIdPedido($idPedido);
-		$this->setValorTotal($valorTotal);
+	public function __construct($idTransacao, $valorTotalRecebido, $validacao, $data, $idProsumidor, $nomeVoluntario) {
+		$this->setIdTransacao($idTransacao);
+		$this->setValorTotalRecebido($valorTotalRecebido);
 		$this->setValidacao($validacao);
 		$this->setData($data);
 		$this->setIdProsumidor($idProsumidor);
@@ -33,12 +33,12 @@ class Pedido {
 	/**
 	 * Getters
 	 */
-	public function getIdPedido(){
-		return $this->idPedido;
+	public function getIdTransacao(){
+		return $this->idTransacao;
 	}
 
-	public function getValorTotal(){
-		return $this->valorTotal;
+	public function getValorTotalRecebido(){
+		return $this->valorTotalRecebido;
 	}
 
 	public function getValidacao(){
@@ -51,20 +51,20 @@ class Pedido {
 	public function getIdProsumidor(){
 		return $this->idProsumidor;
 	}
-	
+
 	public function getNomeVoluntario(){
 		return $this->nomeVoluntario;
-	}	
+	}
 
 	/**
 	 * Setters
 	 */	
-	public function setIdPedido($newValue){
-		$this->idPedido = $newValue;
+	public function setIdTransacao($newValue){
+		$this->idTransacao = $newValue;
 	}
 
-	public function setValorTotal($newValue){
-		$this->valorTotal = $newValue;
+	public function setValorTotalRecebido($newValue){
+		$this->valorTotalRecebido = $newValue;
 	}
 
 	public function setValidacao($newValue){
@@ -81,9 +81,9 @@ class Pedido {
 
 	public function setNomeVoluntario($newValue){
 		$this->nomeVoluntario = $newValue;
-	}	
+	}
 
 }
 
-/* End of file Pedido.php */
-/* Location: ./application/libraries/Pedido.php */
+/* End of file Transacao.php */
+/* Location: ./application/libraries/Transacao.php */

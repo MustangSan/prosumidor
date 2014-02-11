@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2014 at 01:46 AM
+-- Generation Time: Feb 11, 2014 at 07:27 PM
 -- Server version: 5.5.20
 -- PHP Version: 5.3.9
 
@@ -109,12 +109,8 @@ CREATE TABLE IF NOT EXISTS `classproduto` (
 --
 
 INSERT INTO `classproduto` (`idProduto`, `idClassificacao`) VALUES
-(8, 5),
-(10, 4),
-(8, 5),
-(9, 5),
-(6, 5),
-(6, 3);
+(10, 5),
+(10, 4);
 
 -- --------------------------------------------------------
 
@@ -130,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `idPedido` int(11) NOT NULL,
   PRIMARY KEY (`idCompra`),
   KEY `idPedido_idx` (`idPedido`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `compra`
@@ -140,7 +136,15 @@ INSERT INTO `compra` (`idCompra`, `qtdComprada`, `valor`, `idProduto`, `idPedido
 (1, 2, 4000, 7, 1),
 (2, 7, 161, 9, 1),
 (3, 20, 15, 10, 2),
-(4, 2, 22, 6, 2);
+(4, 2, 22, 6, 2),
+(11, 2, 46, 9, 4),
+(12, 3, 6000, 7, 5),
+(13, 20, 4000, 8, 5),
+(14, 2, 400, 8, 4),
+(15, 1, 2000, 7, 6),
+(16, 3, 33, 6, 6),
+(17, 10, 110, 6, 8),
+(18, 3, 69, 9, 8);
 
 -- --------------------------------------------------------
 
@@ -152,19 +156,25 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `idPedido` int(11) NOT NULL AUTO_INCREMENT,
   `valorTotal` float NOT NULL,
   `validacao` int(11) NOT NULL,
-  `data` varchar(11) NOT NULL,
+  `data` date NOT NULL,
   `idProsumidor` int(10) NOT NULL,
+  `nomeVoluntario` varchar(100) NOT NULL,
   PRIMARY KEY (`idPedido`),
   KEY `idProsumidor_idx` (`idProsumidor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `pedido`
 --
 
-INSERT INTO `pedido` (`idPedido`, `valorTotal`, `validacao`, `data`, `idProsumidor`) VALUES
-(1, 4161, 1, '08/02/2014', 2),
-(2, 37, 1, '09/02/2014', 2);
+INSERT INTO `pedido` (`idPedido`, `valorTotal`, `validacao`, `data`, `idProsumidor`, `nomeVoluntario`) VALUES
+(1, 4161, 2, '2014-02-08', 2, 'Guilherme'),
+(2, 37, 2, '2014-02-09', 2, 'Guilherme'),
+(4, 446, 2, '2014-02-08', 3, 'Guilherme'),
+(5, 10000, 2, '2014-01-15', 2, 'Guilherme'),
+(6, 2033, 2, '2013-12-15', 3, 'Guilherme'),
+(8, 179, 2, '2014-02-10', 2, 'Guilherme'),
+(9, 0, 0, '2014-02-11', 2, '0');
 
 -- --------------------------------------------------------
 
@@ -250,9 +260,61 @@ CREATE TABLE IF NOT EXISTS `prosumidor` (
 INSERT INTO `prosumidor` (`idProsumidor`, `email`, `senha`, `nome`, `cpf`, `telefone`, `endereco`, `sexo`, `status`, `tipo`, `saldoConsumidor`) VALUES
 (1, 'guilherme.raminho@gmail.com', 'f79358f48201e819d483c111a21c8d0d', 'Guilherme Raminho', '099.845.046-46', '(31)9999-9999', 'Rua: 2 n:3 B:Norte', 'Masculino', 1, 2, 0),
 (2, 'zangetsu@bleach.com', 'f79358f48201e819d483c111a21c8d0d', 'Zangetsu', '09984504646', '(31)8888-8888', 'Rua: 7 n:7 B:Seven', 'Masculino', 1, 2, 0),
-(3, 'teste@teste.com', 'f5d1278e8109edd94e1e4197e04873b9', 'Teste', '567.567.567-89', '(31)9090-9090', 'R:4, n:8, B;bis', 'Masculino', 1, 1, -23.23),
+(3, 'teste@teste.com', 'f5d1278e8109edd94e1e4197e04873b9', 'Teste', '567.567.567-89', '(31)9090-9090', 'R:4, n:8, B;bis', 'Masculino', 1, 1, 0),
 (4, 'leo@leo.com', 'fe764ea41443c5f9d56627de190d2273', 'Leo Coelho', '123.000.789-77', '(31)8888-7777', 'Rua: 6 n:6 B:Six', 'Masculino', 1, 2, 0),
 (5, 'luan.noe@gmail.com', 'f79358f48201e819d483c111a21c8d0d', 'Luan Noe', '09876543211', '(31)9999-3434', 'Aquela rua ali', 'Masculino', 1, 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transacao`
+--
+
+CREATE TABLE IF NOT EXISTS `transacao` (
+  `idTransacao` int(11) NOT NULL AUTO_INCREMENT,
+  `valorTotalRecebido` float NOT NULL,
+  `validacao` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `idProsumidor` int(11) NOT NULL,
+  `nomeVoluntario` varchar(100) NOT NULL,
+  PRIMARY KEY (`idTransacao`),
+  KEY `idProsumidor_idx` (`idProsumidor`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `transacao`
+--
+
+INSERT INTO `transacao` (`idTransacao`, `valorTotalRecebido`, `validacao`, `data`, `idProsumidor`, `nomeVoluntario`) VALUES
+(1, 29.5, 2, '2014-02-08', 2, 'Guilherme'),
+(2, 3000, 1, '2014-02-09', 2, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `venda`
+--
+
+CREATE TABLE IF NOT EXISTS `venda` (
+  `idVenda` int(11) NOT NULL AUTO_INCREMENT,
+  `qtdDisponivel` int(11) NOT NULL,
+  `qtdVendida` int(11) NOT NULL,
+  `valorRecebido` float NOT NULL,
+  `idProduto` int(11) NOT NULL,
+  `idTransacao` int(11) NOT NULL,
+  PRIMARY KEY (`idVenda`),
+  KEY `idProdut_idx` (`idProduto`),
+  KEY `idTransacao_idx` (`idTransacao`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `venda`
+--
+
+INSERT INTO `venda` (`idVenda`, `qtdDisponivel`, `qtdVendida`, `valorRecebido`, `idProduto`, `idTransacao`) VALUES
+(7, 19, 10, 7.5, 10, 1),
+(8, 2, 2, 22, 6, 1),
+(9, 15, 0, 0, 8, 2);
 
 --
 -- Constraints for dumped tables
@@ -288,6 +350,19 @@ ALTER TABLE `produto`
 --
 ALTER TABLE `propriedade`
   ADD CONSTRAINT `idProsumidor` FOREIGN KEY (`idProsumidor`) REFERENCES `prosumidor` (`idProsumidor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `transacao`
+--
+ALTER TABLE `transacao`
+  ADD CONSTRAINT `idProsumid` FOREIGN KEY (`idProsumidor`) REFERENCES `prosumidor` (`idProsumidor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `venda`
+--
+ALTER TABLE `venda`
+  ADD CONSTRAINT `idProdut` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`idProduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `idTransacao` FOREIGN KEY (`idTransacao`) REFERENCES `transacao` (`idTransacao`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -106,7 +106,10 @@
                           </tbody>
                         </table>
                         </div>
-                        <a href="<?php echo $base; ?>administracao/prosumidores/pedidos/<?php echo $prosumidor->getIdProsumidor(); ?>" class="btn btn-primary">Ver Pedidos</a>
+                        <a href="<?php echo $base; ?>administracao/prosumidores/pedidos/<?php echo $prosumidor->getIdProsumidor(); ?>" class="btn btn-primary">Ver Pedidos </a>
+                        <?php if($prosumidor->getTipo() == 2 ){ ?>
+                          <a href="<?php echo $base; ?>administracao/prosumidores/transacoes/<?php echo $prosumidor->getIdProsumidor(); ?>" class="btn btn-primary"> Ver Vendas</a>
+                        <?php } ?>
                       </div>
                     	<h3 class="form-title form-title-first"><i class="icon-map-marker"></i> Propriedades Cadastradas</h3>
                     	<div class="table-responsive">

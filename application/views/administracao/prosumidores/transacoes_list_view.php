@@ -37,19 +37,24 @@
 							<thead>
 							  <tr>
 							    <th>Data</th>
-							    <th>Valor Total</th>
+							    <th>Valor Recebido</th>
 							  	<th>Status</th>
 							  	<th>Voluntario</th>
-							  	<th width="177"></th>
+							  	<th width="187"></th>
 							  </tr>
 							</thead>
 							<tbody>
 								<?php 
-								if(isset($pedidos)){
-									foreach($pedidos as $a){	
+								if(isset($transacoes)){
+									foreach($transacoes as $a){	
 										echo '<tr>';
 										echo '<td>'.$a->getData().'</td>';
-										echo '<td>'.$a->getValorTotal().'</td>';
+										
+										if($a->getValorTotalRecebido() != 0)
+											echo '<td>'.$a->getValorTotalRecebido().'</td>';
+										else
+											echo '<td>A Receber</td>';
+										
 										if($a->getValidacao() == 0)
 											echo '<td><span class="label label-info">Aberto</span></td>';
 										else {
@@ -60,17 +65,17 @@
 													echo '<td><span class="label label-success">Concluído</span></td>';
 											}
 										}
-
+										
 										if($a->getValidacao() == 2)
 											echo '<td>'.$a->getNomeVoluntario().'</td>';
 										else
 											echo '<td></td>';
 
 										if($a->getValidacao() == 1)
-											echo '<td class="text-right"><a href="'.$base.'administracao/prosumidores/concluirPedido/'.$a->getIdPedido().'" class="btn btn-success btn-xs"><i class="icon-ok-sign"></i> Concluir Pedido</a>';
+											echo '<td class="text-right"><a href="'.$base.'administracao/prosumidores/concluirTransacao/'.$a->getIdTransacao().'" class="btn btn-success btn-xs"><i class="icon-ok-sign"></i> Concluir Venda</a>';
 										else
 											echo '<td class="text-right">';
-										echo ' <a href="'.$base.'administracao/prosumidores/pedido/'.$a->getIdPedido().'" class="btn btn-default btn-xs"><i class="icon-info-sign"></i> Ver</a></td>';
+										echo ' <a href="'.$base.'administracao/prosumidores/transacao/'.$a->getIdTransacao().'" class="btn btn-default btn-xs"><i class="icon-info-sign"></i> Ver</a></td>';
 										echo '</tr>';
 									}
 								}

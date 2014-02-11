@@ -296,7 +296,7 @@ class Produtos extends CI_Controller {
 					$c = $key->getIdClassificacao();
 					$value = $this->input->post('classi'.$c);
 					if($value == 1){
-						//if(!$this->Produto_model->jaExiste($idProduto, $key->getIdClassificacao())){
+						if(!$this->Produto_model->jaExiste($idProduto, $key->getIdClassificacao()))
 							$result = $this->Produto_model->inserirClassProduto($idProduto,$key->getIdClassificacao());
 						//}
 						//else{

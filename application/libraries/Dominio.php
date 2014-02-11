@@ -24,6 +24,8 @@ class Dominio {
 		require('Produto.php');
 		require('Propriedade.php');
 		require('Prosumidor.php');
+		require('Transacao.php');
+		require('Venda.php');
 	}
 }
 
