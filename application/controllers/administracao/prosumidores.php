@@ -169,7 +169,7 @@ class Prosumidores extends CI_Controller {
         
         if ($this->form_validation->run() == FALSE)
         {
-            $data['qtd'] = $this->input->post('qtd');
+            $data['qtd'] = $venda->getQtdVendida();
             
             $this->load->view('administracao/prosumidores/confirmarVenda_view', $data);
         }  
