@@ -38,7 +38,12 @@
 								<thead>
 								  <tr>
 								    <th>Data</th>
-								    <th>Valor Total</th>
+								    <?php
+								    if($transacao->getValidacao() != 2)
+								    	echo '<th>Valor Total</th>';
+								    else
+								    	echo '<th>Valor Recebido</th>';
+								    ?>
 								  	<th>Status</th>
 								  	<th>Voluntario</th>
 								  </tr>

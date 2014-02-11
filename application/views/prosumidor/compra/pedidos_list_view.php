@@ -39,6 +39,7 @@
 							    <th>Data</th>
 							    <th>Valor Total</th>
 							  	<th>Status</th>
+							  	<th>Voluntario</th>
 							  	<th width="127"></th>
 							  </tr>
 							</thead>
@@ -59,6 +60,11 @@
 													echo '<td><span class="label label-success">Concluído</span></td>';
 											}
 										}
+										if($a->getValidacao() == 2)
+											echo '<td>'.$a->getNomeVoluntario().'</td>';
+										else
+											echo '<td></td>';
+																					
 										echo '<td class="text-right">';
 										if($a->getValidacao() == 0)
 											echo '<a href="'.$base.'prosumidor/comprar/removerPedido/'.$a->getIdPedido().'" class="btn btn-danger btn-xs"><i class="icon-remove"></i></a>';

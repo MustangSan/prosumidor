@@ -40,6 +40,7 @@
 								    <th>Data</th>
 								    <th>Valor Total</th>
 								  	<th>Status</th>
+								  	<th>Voluntario</th>
 								  </tr>
 								</thead>
 								<tbody>
@@ -57,6 +58,10 @@
 												echo '<td><span class="label label-success">Concluído</span></td>';
 										}
 									}
+									if($pedido->getValidacao() == 2)
+										echo '<td>'.$pedido->getNomeVoluntario().'</td>';
+									else
+										echo '<td></td>';									
 									echo '</tr>';
 								?>
 								</tbody>
