@@ -43,9 +43,9 @@
 							    <th>Unidade</th>
 							    <th>Disponivel</th>
 							    <th>Categoria</th>
-							    <?php for ($i=0; $i < $numClass; $i++) { 
-							    	echo '<th>Classe</th>';
-							    }?>
+							    <?php //for ($i=0; $i < $numClass; $i++) { 
+							    	//echo '<th>Classe</th>';
+							    //}?>
 							  </tr>
 							</thead>
 							<tbody>
@@ -66,6 +66,29 @@
 										echo  '<td><center>Não</center></td>';
 									
 									echo '<td>'.$categoria->getNome().'</td>';
+									/*if(isset($class)){
+										foreach ($class as $key) {
+											echo '<td>'.$key->getNome().'</td>';
+										}
+									}*/
+									echo '</tr>';
+								?>
+							</tbody>
+						</table>
+						</div>
+
+						<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+							  <tr>
+							    <?php for ($i=0; $i < $numClass; $i++) { 
+							    	echo '<th>Classe</th>';
+							    }?>
+							  </tr>		
+							</thead>
+							<tbody>
+								<?php 
+									echo '<tr>';
 									if(isset($class)){
 										foreach ($class as $key) {
 											echo '<td>'.$key->getNome().'</td>';
@@ -73,9 +96,10 @@
 									}
 									echo '</tr>';
 								?>
-							</tbody>
+							</tbody>									
 						</table>
 						</div>
+
                     	<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover">
 							<thead>

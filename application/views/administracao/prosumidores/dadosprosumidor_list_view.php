@@ -111,6 +111,7 @@
                           <a href="<?php echo $base; ?>administracao/prosumidores/transacoes/<?php echo $prosumidor->getIdProsumidor(); ?>" class="btn btn-primary"> Ver Vendas</a>
                         <?php } ?>
                       </div>
+                      <?php if($prosumidor->getTipo() == 2){ ?>
                     	<h3 class="form-title form-title-first"><i class="icon-map-marker"></i> Propriedades Cadastradas</h3>
                     	<div class="table-responsive">
           						<table class="table table-striped table-bordered table-hover">
@@ -136,6 +137,7 @@
           							</tbody>
               				</table>
           			      </div>
+                      <?php } ?>
                       <a href="<?php echo $base; ?>administracao/prosumidores/" class="btn btn-primary">Voltar</a>
                     </div>
                   </div>
